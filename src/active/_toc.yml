@@ -7,10 +7,18 @@ parts:
     - caption: "Set up analysis"
       chapters:
       - file: lit_utility_functions_2025.ipynb
+      nav:
+        - file: intro.md
+        - file: lit_utility_functions_2025.ipynb
     - caption: "Compile ancillary cartographic data"
       chapters:
       - file: download_geographic_refs.ipynb
       - file: get_target_toponyms.ipynb
+      nav:
+        - file: download_geographic_refs.ipynb
+        - file: get_target_toponyms.ipynb
     - caption: "Design scientific database search protocol"
       chapters:
       - file: create_search_strings.ipynb
+      nav:
+        - file: create_search_strings.ipynb
