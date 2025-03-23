@@ -1,0 +1,16 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: intro
+parts:
+    - caption: Set up analysis
+      chapters:
+      - file: lit_utility_functions_2025.ipynb
+    - caption: Compile ancillary cartographic data
+      chapters:
+      - file: download_geographic_refs.ipynb
+      - file: get_target_toponyms.ipynb
+    - caption: Design scientific database search protocol
+      chapters:
+      - file: create_search_strings.ipynb
