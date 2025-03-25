@@ -1,0 +1,812 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Create search strings &#8212; Basin Threshold Tool data mining protocol</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b76e3c8a" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'create_search_strings';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Get target toponyms" href="get_target_toponyms.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/sbti_low_res_logo.png" class="logo__image only-light" alt="Basin Threshold Tool data mining protocol - Home"/>
+    <script>document.write(`<img src="_static/sbti_low_res_logo.png" class="logo__image only-dark" alt="Basin Threshold Tool data mining protocol - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Set up analysis</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="lit_utility_functions_2025.html">Utility functions used throughout analysis</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Compile ancillary cartographic data</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="download_geographic_refs.html">Download hydrographic and administrative boundary data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="get_target_toponyms.html">Get target toponyms</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Design scientific database search protocol</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Create search strings</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/messamat/BTT_data_mining_protocol" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/messamat/BTT_data_mining_protocol/issues/new?title=Issue%20on%20page%20%2Fcreate_search_strings.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/create_search_strings.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Create search strings</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="create-search-strings">
+<h1>Create search strings<a class="headerlink" href="#create-search-strings" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">run</span> lit_utility_functions_2025.ipynb
+
+<span class="kn">import</span> <span class="nn">bream</span>
+<span class="kn">import</span> <span class="nn">nltk</span>
+<span class="kn">from</span> <span class="nn">nltk.corpus</span> <span class="kn">import</span> <span class="n">wordnet</span>
+<span class="kn">from</span> <span class="nn">nltk.stem</span> <span class="kn">import</span> <span class="n">WordNetLemmatizer</span>
+<span class="kn">from</span> <span class="nn">nltk.corpus</span> <span class="kn">import</span> <span class="n">words</span>
+<span class="kn">from</span> <span class="nn">pyinflect</span> <span class="kn">import</span> <span class="n">getInflection</span>
+<span class="kn">import</span> <span class="nn">spacy</span>
+<span class="kn">from</span> <span class="nn">textblob</span> <span class="kn">import</span> <span class="n">Word</span>
+
+
+<span class="c1"># Load NLTK resources</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">nltk</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;corpora/wordnet&#39;</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">LookupError</span><span class="p">:</span>
+    <span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;wordnet&#39;</span><span class="p">)</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">nltk</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;corpora/words&#39;</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">LookupError</span><span class="p">:</span>
+    <span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;words&#39;</span><span class="p">)</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">nltk</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;tokenizers/punkt&#39;</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">LookupError</span><span class="p">:</span>
+    <span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;punkt&#39;</span><span class="p">)</span>
+    
+<span class="c1"># Load spaCy model</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">spacy_nlp</span> <span class="o">=</span> <span class="n">spacy</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;en_core_web_sm&quot;</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">OSError</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Downloading en_core_web_sm model...&quot;</span><span class="p">)</span>
+    <span class="n">spacy</span><span class="o">.</span><span class="n">cli</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s2">&quot;en_core_web_sm&quot;</span><span class="p">)</span>
+    <span class="n">spacy_nlp</span> <span class="o">=</span> <span class="n">spacy</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;en_core_web_sm&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[nltk_data] Downloading package wordnet to
+[nltk_data]     C:\Users\messa\AppData\Roaming\nltk_data...
+[nltk_data]   Package wordnet is already up-to-date!
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">find_matching_words</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="n">bound_pattern</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">      Finds all English words that match a given regular expression pattern.</span>
+<span class="sd">      Args:</span>
+<span class="sd">        pattern: The regular expression pattern (string).</span>
+<span class="sd">      Returns:</span>
+<span class="sd">        A list of English words that match the pattern.  Returns an empty list if no</span>
+<span class="sd">        words match or if there&#39;s an invalid regex pattern.  Prints a warning if the</span>
+<span class="sd">        NLTK words corpus is not found.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">bound_pattern</span><span class="p">:</span>
+        <span class="n">pattern</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;^</span><span class="si">{</span><span class="n">pattern</span><span class="si">}</span><span class="s1">$&#39;</span>
+    <span class="n">regex</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">pattern</span><span class="p">)</span>
+    <span class="n">english_words</span> <span class="o">=</span> <span class="n">words</span><span class="o">.</span><span class="n">words</span><span class="p">()</span>
+    <span class="n">matching_words</span> <span class="o">=</span> <span class="p">[</span><span class="n">word</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">english_words</span> <span class="k">if</span> <span class="n">regex</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">word</span><span class="p">)]</span>
+
+    <span class="k">return</span> <span class="n">matching_words</span>
+
+
+<span class="k">def</span> <span class="nf">combinate_concats</span><span class="p">(</span>
+    <span class="n">prefixes</span><span class="p">,</span> <span class="n">suffixes</span><span class="p">,</span> <span class="n">separators</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">],</span> <span class="n">add_quotes</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Generates all combinations using itertools.product (most efficient).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">add_quotes</span><span class="p">:</span>
+        <span class="n">combinations</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="s1">&#39;&quot;&#39;</span> <span class="o">+</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">combination</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;&quot;&#39;</span>
+            <span class="k">for</span> <span class="n">combination</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">product</span><span class="p">(</span><span class="n">prefixes</span><span class="p">,</span> <span class="n">separators</span><span class="p">,</span> <span class="n">suffixes</span><span class="p">)</span>
+        <span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">combinations</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">combination</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">combination</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">product</span><span class="p">(</span><span class="n">prefixes</span><span class="p">,</span> <span class="n">separators</span><span class="p">,</span> <span class="n">suffixes</span><span class="p">)</span>
+        <span class="p">]</span>
+    <span class="k">return</span> <span class="n">combinations</span>
+
+<span class="k">def</span> <span class="nf">plural_form_exists</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="n">in_lemmatizer</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Checks if a plausible plural form of a word exists, with improved logic</span>
+<span class="sd">    and handling of irregular plurals.  Uses WordNet and a rule-based fallback.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">      word: The word (string) to check.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">      True if a plausible plural form is found, False otherwise.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># 1. Check if the word is already plural (common case):</span>
+    <span class="k">if</span> <span class="n">wordnet</span><span class="o">.</span><span class="n">synsets</span><span class="p">(</span><span class="n">word</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">any</span><span class="p">(</span><span class="n">lemma</span><span class="o">.</span><span class="n">name</span><span class="p">()</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;s&#39;</span><span class="p">)</span> 
+                                     <span class="k">for</span> <span class="n">synset</span> <span class="ow">in</span> <span class="n">wordnet</span><span class="o">.</span><span class="n">synsets</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
+                                     <span class="k">for</span> <span class="n">lemma</span> <span class="ow">in</span> <span class="n">synset</span><span class="o">.</span><span class="n">lemmas</span><span class="p">()):</span>
+       <span class="k">return</span> <span class="kc">True</span>
+
+    <span class="c1"># 2. Lemmatize the word (get the singular form):</span>
+    <span class="n">lemma</span> <span class="o">=</span> <span class="n">in_lemmatizer</span><span class="o">.</span><span class="n">lemmatize</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="n">wordnet</span><span class="o">.</span><span class="n">NOUN</span><span class="p">)</span>
+
+
+    <span class="c1">#3. Check if word is the lemma (if so, it is most likely singular)</span>
+    <span class="k">if</span> <span class="n">lemma</span> <span class="o">!=</span> <span class="n">word</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">True</span> <span class="c1">#Word is not the lemma (it&#39;s likely already a plural form)</span>
+    
+    <span class="c1"># 4. If lemma and word are the same, then add an s and try again with wordnet</span>
+    <span class="k">if</span> <span class="n">wordnet</span><span class="o">.</span><span class="n">synsets</span><span class="p">(</span><span class="n">word</span> <span class="o">+</span> <span class="s1">&#39;s&#39;</span><span class="p">):</span>
+        <span class="k">return</span> <span class="kc">True</span>
+    
+    <span class="c1"># 5. Try common plural endings</span>
+    <span class="k">if</span> <span class="n">word</span><span class="o">.</span><span class="n">endswith</span><span class="p">((</span><span class="s2">&quot;s&quot;</span><span class="p">,</span> <span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="s2">&quot;z&quot;</span><span class="p">,</span> <span class="s2">&quot;ch&quot;</span><span class="p">,</span> <span class="s2">&quot;sh&quot;</span><span class="p">)):</span>
+        <span class="n">plural</span> <span class="o">=</span> <span class="n">word</span> <span class="o">+</span> <span class="s2">&quot;es&quot;</span>
+    <span class="k">elif</span> <span class="n">word</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;y&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">word</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">word</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="s2">&quot;aeiou&quot;</span><span class="p">:</span>
+        <span class="n">plural</span> <span class="o">=</span> <span class="n">word</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;ies&quot;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">plural</span> <span class="o">=</span> <span class="n">word</span> <span class="o">+</span> <span class="s2">&quot;s&quot;</span>
+    
+    <span class="k">if</span> <span class="n">wordnet</span><span class="o">.</span><span class="n">synsets</span><span class="p">(</span><span class="n">plural</span><span class="p">):</span>
+        <span class="k">return</span> <span class="kc">True</span>
+
+    <span class="k">return</span> <span class="kc">False</span>
+    
+<span class="k">def</span> <span class="nf">textblob_pluralize</span><span class="p">(</span><span class="n">word</span><span class="p">):</span>
+    <span class="n">w</span> <span class="o">=</span> <span class="n">Word</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">w</span><span class="o">.</span><span class="n">pluralize</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">get_spelling_variants</span><span class="p">(</span><span class="n">word</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Gets American and British spelling variants of a word using bream.&quot;&quot;&quot;</span>
+    <span class="n">variants</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="n">variants</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>  <span class="c1"># Add the original word</span>
+
+    <span class="k">try</span><span class="p">:</span>
+      <span class="c1">#The following lines will generate errors if the words are not in the</span>
+        <span class="c1">#dictionary. We capture these.</span>
+        <span class="n">american</span> <span class="o">=</span> <span class="n">bream</span><span class="o">.</span><span class="n">to_american</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
+        <span class="n">variants</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">american</span><span class="p">)</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="k">pass</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">british</span> <span class="o">=</span> <span class="n">bream</span><span class="o">.</span><span class="n">to_british</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
+        <span class="n">variants</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">british</span><span class="p">)</span>
+    <span class="k">except</span><span class="p">:</span>
+      <span class="k">pass</span>
+    <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">variants</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">create_generic_search_terms</span><span class="p">():</span>
+    <span class="n">combo1_1</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;ecologic</span><span class="se">\\</span><span class="s2">S*&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;eco&quot;</span><span class="p">,</span> <span class="s2">&quot;hydrologic</span><span class="se">\\</span><span class="s2">S*&quot;</span><span class="p">],</span> 
+                <span class="p">[</span><span class="s2">&quot;hydro&quot;</span><span class="p">,</span> <span class="s2">&quot;ecologic</span><span class="se">\\</span><span class="s2">S*&quot;</span><span class="p">],</span>
+                <span class="s1">&#39;environmental&#39;</span><span class="p">,</span> <span class="s1">&#39;minim</span><span class="se">\\</span><span class="s1">S</span><span class="se">\\</span><span class="s1">S&#39;</span><span class="p">,</span> <span class="s1">&#39;acceptable&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;augmented&#39;</span><span class="p">,</span> <span class="s1">&#39;augmentation&#39;</span><span class="p">,</span> <span class="s1">&#39;compensation&#39;</span><span class="p">,</span> 
+                <span class="s1">&#39;experimental&#39;</span><span class="p">,</span> <span class="s1">&#39;flushing&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;in&#39;</span><span class="p">,</span> <span class="s1">&#39;stream&#39;</span><span class="p">],</span> <span class="s1">&#39;maintenance&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;optimum&#39;</span><span class="p">,</span> <span class="s1">&#39;restorati</span><span class="se">\\</span><span class="s1">S</span><span class="si">{2}</span><span class="s1">&#39;</span><span class="p">]</span>
+
+    <span class="n">combo1_2</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;flood&#39;</span><span class="p">,</span> <span class="s1">&#39;flow&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;water&#39;</span><span class="p">,</span> <span class="s1">&#39;level&#39;</span><span class="p">],</span> <span class="s1">&#39;discharge&#39;</span><span class="p">]</span>
+    
+    <span class="n">combo2_1</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;compensat[a-z]{1,3}&#39;</span><span class="p">,</span> <span class="s1">&#39;conservation&#39;</span><span class="p">,</span> <span class="s1">&#39;cultural&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;cut&#39;</span><span class="p">,</span> <span class="s1">&#39;off&#39;</span><span class="p">],</span> 
+                <span class="s1">&#39;design&#39;</span><span class="p">,</span> <span class="s1">&#39;fish&#39;</span><span class="p">,</span> <span class="s1">&#39;functional&#39;</span><span class="p">,</span> <span class="s1">&#39;indigenous&#39;</span><span class="p">,</span> <span class="s1">&#39;limit&#39;</span><span class="p">,</span> <span class="s1">&#39;maintenance&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;management&#39;</span><span class="p">,</span> <span class="s1">&#39;maximum&#39;</span><span class="p">,</span> <span class="s1">&#39;natural&#39;</span><span class="p">,</span> <span class="s1">&#39;preference&#39;</span><span class="p">,</span> 
+                <span class="s1">&#39;protection&#39;</span><span class="p">,</span> <span class="s1">&#39;rating&#39;</span><span class="p">,</span> <span class="s1">&#39;regime[a-z]{0,1}&#39;</span><span class="p">,</span> <span class="s1">&#39;residual&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;right&#39;</span><span class="p">,</span> <span class="s1">&#39;sanita(ry|tion)&#39;</span><span class="p">,</span> <span class="s1">&#39;scenario&#39;</span><span class="p">,</span> <span class="s1">&#39;standard&#39;</span><span class="p">,</span> 
+                <span class="s1">&#39;suitable&#39;</span><span class="p">,</span> <span class="s1">&#39;surplus&#39;</span><span class="p">,</span> <span class="s1">&#39;sustainable&#39;</span><span class="p">,</span> <span class="s1">&#39;threshold&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;use&#39;</span><span class="p">,</span> <span class="s1">&#39;vital&#39;</span><span class="p">]</span>
+    <span class="n">combo2_2</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;flow&#39;</span><span class="p">]</span>
+    
+    <span class="n">combo3_1</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;downstream&#39;</span><span class="p">,</span> <span class="s1">&#39;dam&#39;</span><span class="p">,</span> <span class="s1">&#39;reservoir&#39;</span><span class="p">]</span>
+    <span class="n">combo3_2</span> <span class="o">=</span> <span class="p">[[</span><span class="s1">&#39;water&#39;</span><span class="p">,</span> <span class="s1">&#39;release&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;flow&#39;</span><span class="p">,</span> <span class="s1">&#39;release&#39;</span><span class="p">],</span> <span class="s1">&#39;reoperation&#39;</span><span class="p">]</span>
+    
+    <span class="n">combo4_1</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;controlled&#39;</span><span class="p">,</span> <span class="s1">&#39;artificial&#39;</span><span class="p">]</span>
+    <span class="n">combo4_2</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;flood&#39;</span><span class="p">]</span>
+    
+    <span class="n">combo5_1</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;hydrologic(al)*&#39;</span><span class="p">]</span>
+    <span class="n">combo5_2</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;requirement&#39;</span><span class="p">,</span> <span class="s1">&#39;manipulation&#39;</span><span class="p">]</span>
+    
+    <span class="n">combo6_1</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;flow&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;stream&#39;</span><span class="p">,</span> <span class="s1">&#39;flow&#39;</span><span class="p">],</span> <span class="s1">&#39;freshwater&#39;</span><span class="p">,</span> <span class="s1">&#39;water&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;water&#39;</span><span class="p">,</span> <span class="s1">&#39;level&#39;</span><span class="p">]]</span>
+    <span class="n">combo6_2</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;abstraction&#39;</span><span class="p">,</span> <span class="s1">&#39;allocation&#39;</span><span class="p">,</span> <span class="s1">&#39;criteri</span><span class="se">\\</span><span class="s1">S{1,2}&#39;</span><span class="p">,</span> <span class="s1">&#39;delivery*&#39;</span><span class="p">,</span> 
+                <span class="s1">&#39;demand&#39;</span><span class="p">,</span> <span class="s1">&#39;guideline&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;need&#39;</span><span class="p">,</span> <span class="s1">&#39;prescription&#39;</span><span class="p">,</span> <span class="s1">&#39;recommendation&#39;</span><span class="p">,</span> <span class="s1">&#39;recovery&#39;</span><span class="p">,</span> <span class="s1">&#39;requirement&#39;</span><span class="p">,</span> 
+                <span class="s1">&#39;reserve&#39;</span><span class="p">,</span> <span class="s1">&#39;restoration&#39;</span><span class="p">,</span> <span class="s1">&#39;restriction&#39;</span><span class="p">,</span> <span class="s1">&#39;withdrawal&#39;</span><span class="p">]</span>
+    
+    <span class="n">search_dict</span> <span class="o">=</span> <span class="p">{</span>
+         <span class="s1">&#39;search1&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;with&#39;</span><span class="p">,</span> <span class="p">[</span><span class="n">combo1_1</span><span class="p">,</span> <span class="n">combo1_2</span><span class="p">]],</span>
+         <span class="s1">&#39;search2&#39;</span><span class="p">:</span>  <span class="p">[</span><span class="s1">&#39;with&#39;</span><span class="p">,</span> <span class="p">[</span><span class="n">combo2_1</span><span class="p">,</span> <span class="n">combo2_2</span><span class="p">]],</span>
+         <span class="s1">&#39;search3&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;pre&#39;</span><span class="p">,</span> <span class="p">[</span><span class="n">combo3_1</span><span class="p">,</span> <span class="n">combo3_2</span><span class="p">]],</span>
+         <span class="s1">&#39;search4&#39;</span><span class="p">:</span>  <span class="p">[</span><span class="s1">&#39;pre&#39;</span><span class="p">,</span> <span class="p">[</span><span class="n">combo4_1</span><span class="p">,</span> <span class="n">combo4_2</span><span class="p">]],</span>
+         <span class="s1">&#39;search5&#39;</span><span class="p">:</span>  <span class="p">[</span><span class="s1">&#39;pre&#39;</span><span class="p">,</span> <span class="p">[</span><span class="n">combo5_1</span><span class="p">,</span> <span class="n">combo5_2</span><span class="p">]],</span>
+         <span class="s1">&#39;search6&#39;</span><span class="p">:</span>  <span class="p">[</span><span class="s1">&#39;with&#39;</span><span class="p">,</span> <span class="p">[</span><span class="n">combo6_1</span><span class="p">,</span> <span class="n">combo6_2</span><span class="p">]]</span>
+    <span class="p">}</span>
+    <span class="k">return</span><span class="p">(</span><span class="n">search_dict</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">create_search_string</span><span class="p">(</span><span class="n">in_search_duo</span><span class="p">,</span> <span class="n">inflect</span><span class="p">,</span> 
+                         <span class="n">or_chars</span> <span class="o">=</span> <span class="s1">&#39; OR &#39;</span><span class="p">,</span> <span class="n">and_chars</span> <span class="o">=</span> <span class="s1">&#39; AND &#39;</span><span class="p">,</span>
+                         <span class="n">inner_separators</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">],</span> <span class="n">use_quotes</span> <span class="o">=</span> <span class="kc">True</span>
+                        <span class="p">):</span>
+    <span class="n">search_list_formatted</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">if</span> <span class="n">inflect</span><span class="p">:</span>
+        <span class="n">nltk_lemmatizer</span> <span class="o">=</span> <span class="n">WordNetLemmatizer</span><span class="p">()</span>
+  
+    <span class="c1">#For each combo item~~~~~~~~~~~~~~~~~~~~</span>
+    <span class="n">combo_list_formatted</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">combo_list</span> <span class="ow">in</span> <span class="n">in_search_duo</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+        <span class="n">word_group_formatted</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">repattern_group</span> <span class="ow">in</span> <span class="n">combo_list</span><span class="p">:</span>
+            <span class="c1">#When multiple words in a group</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">repattern_group</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+                <span class="c1">#print(repattern_group)</span>
+                <span class="c1">#Apply find_matching_words to each</span>
+                <span class="n">repattern_group_inflected</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="k">for</span> <span class="n">repattern</span> <span class="ow">in</span> <span class="n">repattern_group</span><span class="p">:</span>
+                    <span class="n">k</span> <span class="o">=</span> <span class="n">find_matching_words</span><span class="p">(</span><span class="n">repattern</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>
+                        <span class="n">k</span> <span class="o">=</span> <span class="n">repattern</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+                        <span class="n">k</span> <span class="o">=</span> <span class="p">[</span><span class="n">k</span><span class="p">]</span>
+
+                    <span class="k">if</span> <span class="ow">not</span> <span class="n">inflect</span><span class="p">:</span>
+                        <span class="c1">#Lemmatize with spacy</span>
+                        <span class="n">token_list</span> <span class="o">=</span> <span class="n">spacy_nlp</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">k</span><span class="p">))</span>
+                        <span class="n">k</span> <span class="o">=</span> <span class="p">[</span><span class="n">token</span><span class="o">.</span><span class="n">lemma_</span> 
+                             <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">token_list</span><span class="p">]</span>
+
+                    <span class="n">repattern_group_inflected</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+
+                <span class="c1">#Then join them in the order with space, no space, and hyphen</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">in_search_duo</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;with&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">use_quotes</span><span class="p">:</span>
+                    <span class="n">use_quotes</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">use_quotes</span> <span class="o">=</span> <span class="kc">False</span>
+                <span class="n">repattern_group_inflected</span> <span class="o">=</span> <span class="n">combinate_concats</span><span class="p">(</span>
+                    <span class="n">prefixes</span><span class="o">=</span><span class="n">repattern_group_inflected</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                    <span class="n">suffixes</span><span class="o">=</span><span class="n">repattern_group_inflected</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                    <span class="n">separators</span><span class="o">=</span><span class="n">inner_separators</span><span class="p">,</span>
+                    <span class="n">add_quotes</span><span class="o">=</span><span class="n">use_quotes</span>
+                <span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">repattern_group_inflected</span> <span class="o">=</span> <span class="n">find_matching_words</span><span class="p">(</span><span class="n">repattern_group</span><span class="p">)</span>
+                <span class="k">if</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">repattern_group_inflected</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>
+                    <span class="n">repattern_group_inflected</span> <span class="o">=</span> <span class="n">repattern_group</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">repattern_group_inflected</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+                    <span class="n">repattern_group_inflected</span> <span class="o">=</span> <span class="p">[</span><span class="n">repattern_group_inflected</span><span class="p">]</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">inflect</span><span class="p">:</span>
+                    <span class="c1">#Lemmatize with spacy</span>
+                    <span class="n">token_list</span> <span class="o">=</span> <span class="n">spacy_nlp</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">repattern_group_inflected</span><span class="p">))</span>
+                    <span class="n">repattern_group_inflected</span> <span class="o">=</span> <span class="p">[</span><span class="n">token</span><span class="o">.</span><span class="n">lemma_</span> 
+                                                   <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">token_list</span><span class="p">]</span>
+
+            <span class="c1">#Remove duplicates</span>
+            <span class="n">word_group_formatted</span> <span class="o">+=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">repattern_group_inflected</span><span class="p">))</span>
+            
+        <span class="c1"># Create a new list to store all variations</span>
+        <span class="n">new_word_group</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">word_group_formatted</span><span class="p">:</span>
+            <span class="c1">#if inflect, add all original matching words, plural forms, </span>
+            <span class="c1">#present participle, and alternative spelling</span>
+            <span class="k">if</span> <span class="n">inflect</span><span class="p">:</span>
+                <span class="n">new_word_group</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>  <span class="c1"># Add original word</span>
+                
+                <span class="c1"># Add plural form</span>
+                <span class="k">if</span> <span class="n">plural_form_exists</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="n">nltk_lemmatizer</span><span class="p">):</span>
+                    <span class="n">plural_word</span> <span class="o">=</span> <span class="n">textblob_pluralize</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
+                    <span class="n">new_word_group</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">plural_word</span><span class="p">)</span>
+
+                <span class="c1"># Add present participle</span>
+                <span class="n">pre_participle</span> <span class="o">=</span> <span class="n">getInflection</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="s1">&#39;VBG&#39;</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">pre_participle</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># Avoid adding if it&#39;s the same</span>
+                    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">pre_participle</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+                        <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">pre_particile</span><span class="p">:</span>
+                            <span class="n">new_word_group</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pre_participle</span><span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">new_word_group</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pre_participle</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+                <span class="c1"># Add spelling variants (british vs americna or vice-versa)</span>
+                <span class="n">spelling_variants</span> <span class="o">=</span> <span class="n">get_spelling_variants</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">variant</span> <span class="ow">in</span> <span class="n">spelling_variants</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">variant</span> <span class="o">!=</span> <span class="n">word</span><span class="p">:</span> <span class="c1"># Avoid adding if its the same</span>
+                      <span class="n">new_word_group</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">variant</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+              <span class="n">new_word_group</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>  <span class="c1"># Keep original word</span>
+
+        <span class="c1"># Remove duplicates (again, after adding variants)</span>
+        <span class="n">word_group_formatted</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">new_word_group</span><span class="p">))</span>
+
+        <span class="c1">#Combine word within word_group/combo_list</span>
+        <span class="n">combo_list_formatted</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">word_group_formatted</span><span class="p">)</span>
+        
+    <span class="c1">#Then create actual combinations for each combo duo</span>
+    <span class="k">if</span> <span class="n">in_search_duo</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;pre&#39;</span><span class="p">:</span>
+        <span class="c1">#Create combinations of all terms separated by a space</span>
+        <span class="n">search_duo_formatted</span> <span class="o">=</span> <span class="n">combinate_concats</span><span class="p">(</span>
+            <span class="n">combo_list_formatted</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> 
+            <span class="n">combo_list_formatted</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+            <span class="n">separators</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">,</span>
+            <span class="n">add_quotes</span> <span class="o">=</span> <span class="n">use_quotes</span>
+        <span class="p">)</span>
+        <span class="n">search_duo_formatted</span> <span class="o">=</span> <span class="n">recomb</span><span class="p">(</span><span class="n">search_duo_formatted</span><span class="p">,</span> 
+                               <span class="n">recomb_sep</span> <span class="o">=</span> <span class="n">or_chars</span><span class="p">)</span>
+        
+    <span class="k">elif</span> <span class="n">in_search_duo</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;with&#39;</span><span class="p">:</span>
+        <span class="c1">#Create two blocks, OR within each block, AND between the two</span>
+        <span class="n">search_duo_formatted</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">recomb</span><span class="p">(</span><span class="n">combo_list_formatted</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="w"> </span><span class="n">recomb_sep</span><span class="o">=</span><span class="n">or_chars</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span>
+            <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">and_chars</span><span class="si">}</span><span class="s1">&#39;</span>
+            <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">recomb</span><span class="p">(</span><span class="n">combo_list_formatted</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="w"> </span><span class="n">recomb_sep</span><span class="o">=</span><span class="n">or_chars</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span>
+        <span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">return</span><span class="p">(</span><span class="n">search_duo_formatted</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="get_target_toponyms.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Get target toponyms</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Mathis Loïc Messager
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
