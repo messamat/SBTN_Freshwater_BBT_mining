@@ -1,0 +1,849 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>&lt;no title&gt; &#8212; Basin Threshold Tool data mining protocol</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b76e3c8a" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'retrieve_fulltexts';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/sbti_low_res_logo.png" class="logo__image only-light" alt="Basin Threshold Tool data mining protocol - Home"/>
+    <script>document.write(`<img src="_static/sbti_low_res_logo.png" class="logo__image only-dark" alt="Basin Threshold Tool data mining protocol - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Set up analysis</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="lit_utility_functions_2025.html">Utility functions used throughout analysis</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Compile ancillary cartographic data</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="download_geographic_refs.html">Download hydrographic and administrative boundary data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="get_target_toponyms.html">Get target toponyms</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Design scientific database search protocol</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="create_search_strings.html">Create search strings</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/messamat/BTT_data_mining_protocol" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/messamat/BTT_data_mining_protocol/issues/new?title=Issue%20on%20page%20%2Fretrieve_fulltexts.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/retrieve_fulltexts.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1><no title></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="simple visible nav section-nav flex-column">
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">run</span> set_up.py
+<span class="o">%</span><span class="k">run</span> lit_utility_functions_2025.ipynb
+
+<span class="kn">import</span> <span class="nn">rispy</span>
+<span class="kn">import</span> <span class="nn">unicodedata</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Import openalex records</span>
+<span class="n">oalex_records_pkl</span> <span class="o">=</span> <span class="n">regex_list_files</span><span class="p">(</span><span class="n">in_dir</span><span class="o">=</span><span class="n">resdir</span><span class="p">,</span> 
+                       <span class="n">in_pattern</span><span class="o">=</span><span class="s1">&#39;oalex_records_.*[.]pkl&#39;</span>
+                      <span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">oalex_records_pkl</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">oalex_records_dict</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+
+<span class="c1">#Import RIS of selected sources</span>
+<span class="n">oalex_records_dict</span> <span class="o">=</span> <span class="p">{</span><span class="n">x</span><span class="p">[</span><span class="s1">&#39;doi&#39;</span><span class="p">]:</span><span class="n">x</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">oalex_records_dict</span><span class="o">.</span><span class="n">values</span><span class="p">()</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">v</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Export to RIS to create a test sample</span>
+<span class="n">oalex_records_ris_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+        <span class="n">resdir</span><span class="p">,</span> 
+        <span class="sa">f</span><span class="s2">&quot;oalex_records_ris_</span><span class="si">{</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">(</span><span class="n">UTC</span><span class="p">)</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y%m</span><span class="si">%d</span><span class="s1">%H%M&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">.ris&quot;</span>
+    <span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Writing out </span><span class="si">{</span><span class="n">oalex_records_ris_path</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">export_oalex_works_to_ris</span><span class="p">(</span>
+    <span class="n">works</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">oalex_records_dict</span><span class="o">.</span><span class="n">values</span><span class="p">()),</span>
+    <span class="n">filename</span><span class="o">=</span><span class="n">oalex_records_ris_path</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Writing out D:\WWF_SBTN\BTT_analysis\results\oalex_records_ris_202503222006.ris
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Read test sample</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">oalex_records_ris_path</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">ris_file</span><span class="p">:</span>
+    <span class="n">entries</span> <span class="o">=</span> <span class="n">rispy</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">ris_file</span><span class="p">)</span>
+    <span class="n">oalex_records_to_get_pd</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">entries</span><span class="p">)</span>
+<span class="n">oalex_records_sample</span> <span class="o">=</span> <span class="n">oalex_records_to_get_pd</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Try to retrieve urls and pdf_urls for samples</span>
+<span class="k">def</span> <span class="nf">get_oalex_fulltext_info</span><span class="p">(</span><span class="n">oalex_sample_ris_pd</span><span class="p">,</span> <span class="n">oalex_fullrecords_dict</span><span class="p">):</span>
+    <span class="n">oalex_loc_dict_list</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">doi_stub</span> <span class="ow">in</span> <span class="n">oalex_sample_ris_pd</span><span class="o">.</span><span class="n">doi</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">tolist</span><span class="p">():</span>
+        <span class="n">full_doi</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;https://doi.org/</span><span class="si">{</span><span class="n">doi_stub</span><span class="si">}</span><span class="s1">&#39;</span>
+        <span class="n">temp_dict</span> <span class="o">=</span> <span class="n">oalex_fullrecords_dict</span><span class="p">[</span><span class="n">full_doi</span><span class="p">][</span><span class="s1">&#39;primary_location&#39;</span><span class="p">]</span>
+        <span class="n">temp_dict</span><span class="p">[</span><span class="s1">&#39;doi&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">doi_stub</span>
+        <span class="n">oalex_loc_dict_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">temp_dict</span><span class="p">)</span>
+
+    <span class="n">oalex_records_loc_pd</span> <span class="o">=</span> <span class="n">list_of_dicts_to_dataframe</span><span class="p">(</span>
+        <span class="n">list_of_dicts</span><span class="o">=</span><span class="n">oalex_loc_dict_list</span><span class="p">,</span>
+        <span class="n">keys_to_keep</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;doi&#39;</span><span class="p">,</span><span class="s1">&#39;is_oa&#39;</span><span class="p">,</span><span class="s1">&#39;landing_page_url&#39;</span><span class="p">,</span><span class="s1">&#39;pdf_url&#39;</span><span class="p">]</span>
+    <span class="p">)</span>
+
+    <span class="n">out_pd</span> <span class="o">=</span> <span class="n">oalex_sample_ris_pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">oalex_records_loc_pd</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;doi&#39;</span><span class="p">)</span>
+    
+    <span class="k">return</span><span class="p">(</span><span class="n">out_pd</span><span class="p">)</span>
+
+<span class="n">oalex_fulltext_info_pd</span> <span class="o">=</span> <span class="n">get_oalex_fulltext_info</span><span class="p">(</span>
+    <span class="n">oalex_sample_ris_pd</span><span class="o">=</span><span class="n">oalex_records_sample</span><span class="p">,</span> 
+    <span class="n">oalex_fullrecords_dict</span><span class="o">=</span><span class="n">oalex_records_dict</span>
+<span class="p">)</span>
+
+<span class="c1">#print(oalex_fulltext_info_pd)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">isna</span><span class="p">(</span><span class="n">oalex_fulltext_info_pd</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">4</span><span class="p">,:]</span><span class="o">.</span><span class="n">authors</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Function to download and rename PDFs</span>
+<span class="k">def</span> <span class="nf">_sanitize_filename</span><span class="p">(</span><span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Sanitizes a filename by removing invalid characters and normalizing spaces.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        filename: The filename to sanitize.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        The sanitized filename.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Normalize unicode characters to closest ASCII equivalent (handle accents, etc.)</span>
+    <span class="n">filename</span> <span class="o">=</span> <span class="n">unicodedata</span><span class="o">.</span><span class="n">normalize</span><span class="p">(</span><span class="s1">&#39;NFKD&#39;</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">,</span> <span class="s1">&#39;ignore&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Replace spaces and slashes with underscores</span>
+    <span class="n">filename</span> <span class="o">=</span> <span class="n">filename</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="s1">&#39;_&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="s1">&#39;_&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Remove invalid characters using a regular expression</span>
+    <span class="n">filename</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;[</span><span class="se">\\</span><span class="s1">:*?&quot;&lt;&gt;|]&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+
+    <span class="c1"># Remove any leading/trailing underscores or periods (clean-up)</span>
+    <span class="n">filename</span> <span class="o">=</span> <span class="n">filename</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
+
+     <span class="c1"># Truncate filename to avoid OS errors (255 is a common limit).  Keep extension.</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">250</span><span class="p">:</span>  <span class="c1"># Leave room for &quot;.pdf&quot;</span>
+        <span class="n">name</span><span class="p">,</span> <span class="n">ext</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+        <span class="n">filename</span> <span class="o">=</span> <span class="n">name</span><span class="p">[:</span><span class="mi">246</span><span class="p">]</span> <span class="o">+</span> <span class="n">ext</span> <span class="c1">#246+4 = 250</span>
+
+    <span class="k">return</span> <span class="n">filename</span>
+
+<span class="k">def</span> <span class="nf">_format_ris_authors</span><span class="p">(</span><span class="n">authors</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="kc">None</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Formats author names for the filename.  Handles None/NaN and lists.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">      authors:  A string, list of strings, NaN, or None representing authors.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">      A formatted author string.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">authors</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>  <span class="c1"># Handle case where it&#39;s already a single string</span>
+        <span class="k">return</span> <span class="n">authors</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">authors</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">authors</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">authors</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2"> et al.&quot;</span>
+        <span class="k">elif</span> <span class="n">authors</span><span class="p">:</span> <span class="c1"># Check for empty list</span>
+             <span class="k">return</span> <span class="n">authors</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;noauthor&quot;</span> <span class="c1"># empty list</span>
+    <span class="k">elif</span> <span class="p">(</span><span class="n">authors</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">isna</span><span class="p">(</span><span class="n">authors</span><span class="p">)):</span>
+        <span class="k">return</span> <span class="s2">&quot;noauthor&quot;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;noauthor&quot;</span> <span class="c1"># Catch-all for other unexpected types</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">download_and_rename_pdfs</span><span class="p">(</span>
+    <span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">out_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">timeout</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">verbose</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Downloads and renames PDFs based on information in a Pandas DataFrame.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        df: DataFrame with &#39;pdf_url&#39;, &#39;authors&#39;, &#39;year&#39;, &#39;secondary_title&#39;, and &#39;title&#39; columns.</span>
+<span class="sd">        out_dir: Output directory to save PDFs.</span>
+<span class="sd">        timeout: Timeout in seconds for the requests.get() call.</span>
+<span class="sd">        verbose: If True, print progress messages.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        TypeError: If `df` is not a Pandas DataFrame or `out_dir` is not a string.</span>
+<span class="sd">        ValueError: if input dataframe is empty or has missing required columns</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;df must be a Pandas DataFrame&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">out_dir</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;out_dir must be a string&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">timeout</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">or</span> <span class="n">timeout</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;timeout must be a positive integer.&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">verbose</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;verbose must be a boolean.&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">df</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Input DataFrame is empty.&quot;</span><span class="p">)</span>
+
+    <span class="n">required_columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;pdf_url&#39;</span><span class="p">,</span> <span class="s1">&#39;authors&#39;</span><span class="p">,</span> <span class="s1">&#39;year&#39;</span><span class="p">,</span> <span class="s1">&#39;secondary_title&#39;</span><span class="p">,</span> <span class="s1">&#39;title&#39;</span><span class="p">]</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="n">col</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">required_columns</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;DataFrame must contain columns: </span><span class="si">{</span><span class="n">required_columns</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Create directory if it doesn&#39;t exist. exist_ok=True prevents errors if it already exists.</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">out_dir</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  
+
+    <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+        <span class="n">pdf_url</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;pdf_url&#39;</span><span class="p">]</span>
+        <span class="n">authors</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;authors&#39;</span><span class="p">]</span>
+        <span class="n">year</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;year&#39;</span><span class="p">]</span>
+        <span class="n">source</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;secondary_title&#39;</span><span class="p">]</span>
+        <span class="n">title</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">]</span>
+
+        <span class="n">author_formatted</span> <span class="o">=</span> <span class="n">_format_ris_authors</span><span class="p">(</span><span class="n">authors</span><span class="p">)</span>
+        <span class="n">filename</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">author_formatted</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">year</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">source</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">title</span><span class="si">}</span><span class="s2">.pdf&quot;</span>
+        <span class="n">filename</span> <span class="o">=</span> <span class="n">_sanitize_filename</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>  <span class="c1"># Sanitize the filename</span>
+
+        <span class="n">pdf_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">out_dir</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">pdf_url</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">pd</span><span class="o">.</span><span class="n">isna</span><span class="p">(</span><span class="n">pdf_url</span><span class="p">):</span>  <span class="c1"># Check for valid and non-null URL</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">pdf_path</span><span class="p">):</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pdf_url</span><span class="p">,</span> 
+                                            <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">,</span>
+                                            <span class="n">allow_redirects</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="c1">#added allow_redirects</span>
+                    <span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>  <span class="c1"># Raise HTTPError for bad responses (4xx or 5xx)</span>
+
+                    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">pdf_path</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">pdf_file</span><span class="p">:</span>
+                        <span class="n">pdf_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+
+                    <span class="c1"># if verbose:</span>
+                    <span class="c1">#     logging.info(f&quot;Downloaded and saved: {pdf_path}&quot;)</span>
+
+                <span class="k">except</span> <span class="n">requests</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">RequestException</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                    <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error downloading </span><span class="si">{</span><span class="n">pdf_url</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="k">except</span> <span class="p">(</span><span class="ne">IOError</span><span class="p">,</span> <span class="ne">OSError</span><span class="p">)</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                    <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error saving file </span><span class="si">{</span><span class="n">pdf_path</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">verbose</span><span class="p">:</span> <span class="c1">#if file exist</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;File already exists, skipping download: </span><span class="si">{</span><span class="n">pdf_path</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="c1"># elif verbose:</span>
+        <span class="c1">#     logging.warning(f&quot;No PDF URL for: {filename}&quot;)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Call the function</span>
+<span class="n">out_pdfdir_basename</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">&#39;[.]*ris_*&#39;</span><span class="p">,</span>
+                             <span class="s1">&#39;&#39;</span><span class="p">,</span> 
+                             <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">oalex_records_ris_path</span><span class="p">))</span>
+<span class="n">download_and_rename_pdfs</span><span class="p">(</span>
+    <span class="n">df</span><span class="o">=</span><span class="n">oalex_fulltext_info_pd</span><span class="p">,</span>
+    <span class="n">out_dir</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">resdir</span><span class="p">,</span> <span class="n">out_pdfdir_basename</span><span class="p">),</span>
+    <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ERROR:root:Error downloading https://onlinelibrary.wiley.com/doi/pdfdirect/10.1111/j.1752-1688.2010.00467.x: 403 Client Error: Forbidden for url: https://onlinelibrary.wiley.com/doi/pdfdirect/10.1111/j.1752-1688.2010.00467.x
+ERROR:root:Error downloading https://www.sciencedirect.com/science/article/am/pii/S1462901116303550: 403 Client Error: Forbidden for url: https://www.sciencedirect.com/science/article/am/pii/S1462901116303550
+ERROR:root:Error saving file D:\WWF_SBTN\BTT_analysis\results\oalex_records_202503222006\Hodges,_Mary_et_al.-2015-Scientific_investigations_report-New_argon-argon_(&amp;lt;sup&amp;gt;40&amp;lt;_sup&amp;gt;Ar_&amp;lt;sup&amp;gt;39&amp;lt;_sup&amp;gt;Ar)_radiometric_age_dates_from_selected_subsurface_basalt_flows_at_the_Idaho_National_Laboratory,_Idaho.pdf: [Errno 2] No such file or directory: &#39;D:\\WWF_SBTN\\BTT_analysis\\results\\oalex_records_202503222006\\Hodges,_Mary_et_al.-2015-Scientific_investigations_report-New_argon-argon_(&amp;lt;sup&amp;gt;40&amp;lt;_sup&amp;gt;Ar_&amp;lt;sup&amp;gt;39&amp;lt;_sup&amp;gt;Ar)_radiometric_age_dates_from_selected_subsurface_basalt_flows_at_the_Idaho_National_Laboratory,_Idaho.pdf&#39;
+ERROR:root:Error downloading https://onlinelibrary.wiley.com/doi/pdfdirect/10.1029/2002WR001571: 403 Client Error: Forbidden for url: https://onlinelibrary.wiley.com/doi/pdfdirect/10.1029/2002WR001571
+ERROR:root:Error downloading https://lib.dr.iastate.edu/cgi/viewcontent.cgi?article=20118&amp;context=rtd: 403 Client Error: Forbidden for url: https://dr.lib.iastate.edu/cgi/viewcontent.cgi?article=20118&amp;context=rtd
+ERROR:root:Error downloading https://onlinelibrary.wiley.com/doi/pdfdirect/10.1029/2012JC008263: 403 Client Error: Forbidden for url: https://onlinelibrary.wiley.com/doi/pdfdirect/10.1029/2012JC008263
+ERROR:root:Error downloading https://iwaponline.com/wp/article-pdf/19/2/358/403419/019020358.pdf: 403 Client Error: Forbidden for url: https://iwaponline.com/wp/article-pdf/19/2/358/403419/019020358.pdf
+ERROR:root:Error saving file D:\WWF_SBTN\BTT_analysis\results\oalex_records_202503222006\Christensen,_Victoria_et_al.-2014-Scientific_investigations_report-Assessment_of_conservation_easements,_total_phosphorus,_and_total_suspended_solids_in_West_Fork_Beaver_Creek,_Minnesota,_1999-2012.pdf: [Errno 2] No such file or directory: &#39;D:\\WWF_SBTN\\BTT_analysis\\results\\oalex_records_202503222006\\Christensen,_Victoria_et_al.-2014-Scientific_investigations_report-Assessment_of_conservation_easements,_total_phosphorus,_and_total_suspended_solids_in_West_Fork_Beaver_Creek,_Minnesota,_1999-2012.pdf&#39;
+ERROR:root:Error saving file D:\WWF_SBTN\BTT_analysis\results\oalex_records_202503222006\Garrett,_Jessica-2012-Scientific_investigations_report-Concentrations,_loads,_and_yields_of_select_constituents_from_major_tributaries_of_the_Mississippi_and_Missouri_Rivers_in_Iowa,_water_years_2004-2008.pdf: [Errno 2] No such file or directory: &#39;D:\\WWF_SBTN\\BTT_analysis\\results\\oalex_records_202503222006\\Garrett,_Jessica-2012-Scientific_investigations_report-Concentrations,_loads,_and_yields_of_select_constituents_from_major_tributaries_of_the_Mississippi_and_Missouri_Rivers_in_Iowa,_water_years_2004-2008.pdf&#39;
+ERROR:root:Error saving file D:\WWF_SBTN\BTT_analysis\results\oalex_records_202503222006\Bartholomay,_Roy_et_al.-2015-Scientific_investigations_report-Hydrologic_influences_on_water-level_changes_in_the_Eastern_Snake_River_Plain_aquifer_at_and_near_the_Idaho_National_Laboratory,_Idaho,_1949-2014.pdf: [Errno 2] No such file or directory: &#39;D:\\WWF_SBTN\\BTT_analysis\\results\\oalex_records_202503222006\\Bartholomay,_Roy_et_al.-2015-Scientific_investigations_report-Hydrologic_influences_on_water-level_changes_in_the_Eastern_Snake_River_Plain_aquifer_at_and_near_the_Idaho_National_Laboratory,_Idaho,_1949-2014.pdf&#39;
+ERROR:root:Error downloading https://onlinelibrary.wiley.com/doi/pdfdirect/10.1111/j.1365-2664.2007.01401.x: 403 Client Error: Forbidden for url: https://onlinelibrary.wiley.com/doi/pdfdirect/10.1111/j.1365-2664.2007.01401.x
+ERROR:root:Error downloading https://onlinelibrary.wiley.com/doi/pdfdirect/10.1002/hyp.6247: 403 Client Error: Forbidden for url: https://onlinelibrary.wiley.com/doi/pdfdirect/10.1002/hyp.6247
+ERROR:root:Error downloading https://www.scielo.br/j/bor/a/QnwP7GgmGpBqD8xdqLzzjqq/?lang=en&amp;format=pdf: (&#39;Connection aborted.&#39;, RemoteDisconnected(&#39;Remote end closed connection without response&#39;))
+ERROR:root:Error downloading https://www.annualreviews.org/doi/pdf/10.1146/annurev-resource-100516-053639: HTTPSConnectionPool(host=&#39;www.annualreviews.org&#39;, port=443): Max retries exceeded with url: /doi/pdf/10.1146/annurev-resource-100516-053639 (Caused by NameResolutionError(&quot;&lt;urllib3.connection.HTTPSConnection object at 0x0000021FD244E4B0&gt;: Failed to resolve &#39;www.annualreviews.org&#39; ([Errno 11001] getaddrinfo failed)&quot;))
+ERROR:root:Error downloading https://www.biodiversitylibrary.org/itempdf/287763: HTTPSConnectionPool(host=&#39;www.biodiversitylibrary.org&#39;, port=443): Max retries exceeded with url: /itempdf/287763 (Caused by NameResolutionError(&quot;&lt;urllib3.connection.HTTPSConnection object at 0x0000021FD244D1C0&gt;: Failed to resolve &#39;www.biodiversitylibrary.org&#39; ([Errno 11001] getaddrinfo failed)&quot;))
+ERROR:root:Error downloading https://pubs.usgs.gov/of/1975/0056/report.pdf: HTTPSConnectionPool(host=&#39;pubs.usgs.gov&#39;, port=443): Max retries exceeded with url: /of/1975/0056/report.pdf (Caused by NameResolutionError(&quot;&lt;urllib3.connection.HTTPSConnection object at 0x0000021FD244F2F0&gt;: Failed to resolve &#39;pubs.usgs.gov&#39; ([Errno 11001] getaddrinfo failed)&quot;))
+ERROR:root:Error downloading https://academic.oup.com/evolut/article-pdf/67/2/388/49979805/evolut0388.pdf: HTTPSConnectionPool(host=&#39;academic.oup.com&#39;, port=443): Max retries exceeded with url: /evolut/article-pdf/67/2/388/49979805/evolut0388.pdf (Caused by NameResolutionError(&quot;&lt;urllib3.connection.HTTPSConnection object at 0x0000021FD244FBF0&gt;: Failed to resolve &#39;academic.oup.com&#39; ([Errno 11001] getaddrinfo failed)&quot;))
+ERROR:root:Error downloading https://pubs.usgs.gov/sir/2020/5045/sir20205045.pdf: HTTPSConnectionPool(host=&#39;pubs.usgs.gov&#39;, port=443): Max retries exceeded with url: /sir/2020/5045/sir20205045.pdf (Caused by NameResolutionError(&quot;&lt;urllib3.connection.HTTPSConnection object at 0x0000021FD2458620&gt;: Failed to resolve &#39;pubs.usgs.gov&#39; ([Errno 11001] getaddrinfo failed)&quot;))
+ERROR:root:Error downloading https://onlinelibrary.wiley.com/doi/pdfdirect/10.1002/ieam.4180: HTTPSConnectionPool(host=&#39;onlinelibrary.wiley.com&#39;, port=443): Max retries exceeded with url: /doi/pdfdirect/10.1002/ieam.4180 (Caused by NameResolutionError(&quot;&lt;urllib3.connection.HTTPSConnection object at 0x0000021FD2459040&gt;: Failed to resolve &#39;onlinelibrary.wiley.com&#39; ([Errno 11001] getaddrinfo failed)&quot;))
+ERROR:root:Error downloading https://pdxscholar.library.pdx.edu/cgi/viewcontent.cgi?article=1185&amp;context=open_access_etds: HTTPSConnectionPool(host=&#39;pdxscholar.library.pdx.edu&#39;, port=443): Max retries exceeded with url: /cgi/viewcontent.cgi?article=1185&amp;context=open_access_etds (Caused by NameResolutionError(&quot;&lt;urllib3.connection.HTTPSConnection object at 0x0000021FD24599A0&gt;: Failed to resolve &#39;pdxscholar.library.pdx.edu&#39; ([Errno 11001] getaddrinfo failed)&quot;))
+ERROR:root:Error downloading https://pubs.usgs.gov/wri/1983/4219/report.pdf: HTTPSConnectionPool(host=&#39;pubs.usgs.gov&#39;, port=443): Max retries exceeded with url: /wri/1983/4219/report.pdf (Caused by NameResolutionError(&quot;&lt;urllib3.connection.HTTPSConnection object at 0x0000021FD244F8F0&gt;: Failed to resolve &#39;pubs.usgs.gov&#39; ([Errno 11001] getaddrinfo failed)&quot;))
+ERROR:root:Error downloading https://pubs.usgs.gov/wri/1973/0029/report.pdf: HTTPSConnectionPool(host=&#39;pubs.usgs.gov&#39;, port=443): Max retries exceeded with url: /wri/1973/0029/report.pdf (Caused by NameResolutionError(&quot;&lt;urllib3.connection.HTTPSConnection object at 0x0000021FD244E8A0&gt;: Failed to resolve &#39;pubs.usgs.gov&#39; ([Errno 11001] getaddrinfo failed)&quot;))
+ERROR:root:Error downloading https://pubs.usgs.gov/of/1982/0433/report.pdf: HTTPSConnectionPool(host=&#39;pubs.usgs.gov&#39;, port=443): Max retries exceeded with url: /of/1982/0433/report.pdf (Caused by NameResolutionError(&quot;&lt;urllib3.connection.HTTPSConnection object at 0x0000021FC4151CA0&gt;: Failed to resolve &#39;pubs.usgs.gov&#39; ([Errno 11001] getaddrinfo failed)&quot;))
+ERROR:root:Error downloading https://pubs.usgs.gov/sir/2014/5091/pdf/sir20145091.pdf: HTTPSConnectionPool(host=&#39;pubs.usgs.gov&#39;, port=443): Max retries exceeded with url: /sir/2014/5091/pdf/sir20145091.pdf (Caused by NameResolutionError(&quot;&lt;urllib3.connection.HTTPSConnection object at 0x0000021FD2458A70&gt;: Failed to resolve &#39;pubs.usgs.gov&#39; ([Errno 11001] getaddrinfo failed)&quot;))
+ERROR:root:Error downloading https://pubs.usgs.gov/sir/2014/5013/pdf/sir2014-5013.pdf: HTTPSConnectionPool(host=&#39;pubs.usgs.gov&#39;, port=443): Max retries exceeded with url: /sir/2014/5013/pdf/sir2014-5013.pdf (Caused by NameResolutionError(&quot;&lt;urllib3.connection.HTTPSConnection object at 0x0000021FD2459D60&gt;: Failed to resolve &#39;pubs.usgs.gov&#39; ([Errno 11001] getaddrinfo failed)&quot;))
+ERROR:root:Error downloading https://pubs.usgs.gov/of/1985/0680/report.pdf: HTTPSConnectionPool(host=&#39;pubs.usgs.gov&#39;, port=443): Max retries exceeded with url: /of/1985/0680/report.pdf (Caused by NameResolutionError(&quot;&lt;urllib3.connection.HTTPSConnection object at 0x0000021FD245A810&gt;: Failed to resolve &#39;pubs.usgs.gov&#39; ([Errno 11001] getaddrinfo failed)&quot;))
+ERROR:root:Error downloading https://www.biodiversitylibrary.org/itempdf/64371: HTTPSConnectionPool(host=&#39;www.biodiversitylibrary.org&#39;, port=443): Max retries exceeded with url: /itempdf/64371 (Caused by NameResolutionError(&quot;&lt;urllib3.connection.HTTPSConnection object at 0x0000021FD2411400&gt;: Failed to resolve &#39;www.biodiversitylibrary.org&#39; ([Errno 11001] getaddrinfo failed)&quot;))
+ERROR:root:Error downloading https://www.researchsquare.com/article/rs-22417/v1.pdf: HTTPSConnectionPool(host=&#39;www.researchsquare.com&#39;, port=443): Max retries exceeded with url: /article/rs-22417/v1.pdf (Caused by NameResolutionError(&quot;&lt;urllib3.connection.HTTPSConnection object at 0x0000021FD244EE10&gt;: Failed to resolve &#39;www.researchsquare.com&#39; ([Errno 11001] getaddrinfo failed)&quot;))
+ERROR:root:Error downloading https://pubs.usgs.gov/wri/1996/4070/report.pdf: HTTPSConnectionPool(host=&#39;pubs.usgs.gov&#39;, port=443): Max retries exceeded with url: /wri/1996/4070/report.pdf (Caused by NameResolutionError(&quot;&lt;urllib3.connection.HTTPSConnection object at 0x0000021FD244F560&gt;: Failed to resolve &#39;pubs.usgs.gov&#39; ([Errno 11001] getaddrinfo failed)&quot;))
+ERROR:root:Error downloading https://pubs.usgs.gov/sir/2007/5175/pdf/SIR2007-5175.pdf: HTTPSConnectionPool(host=&#39;pubs.usgs.gov&#39;, port=443): Max retries exceeded with url: /sir/2007/5175/pdf/SIR2007-5175.pdf (Caused by NameResolutionError(&quot;&lt;urllib3.connection.HTTPSConnection object at 0x0000021FD245A570&gt;: Failed to resolve &#39;pubs.usgs.gov&#39; ([Errno 11001] getaddrinfo failed)&quot;))
+ERROR:root:Error downloading https://pubs.usgs.gov/sir/2004/5272/pdf/SIR_2004-5272.pdf: HTTPSConnectionPool(host=&#39;pubs.usgs.gov&#39;, port=443): Max retries exceeded with url: /sir/2004/5272/pdf/SIR_2004-5272.pdf (Caused by NameResolutionError(&quot;&lt;urllib3.connection.HTTPSConnection object at 0x0000021FD2459BE0&gt;: Failed to resolve &#39;pubs.usgs.gov&#39; ([Errno 11001] getaddrinfo failed)&quot;))
+ERROR:root:Error downloading https://pubs.usgs.gov/unnumbered/70039469/report.pdf: HTTPSConnectionPool(host=&#39;pubs.usgs.gov&#39;, port=443): Max retries exceeded with url: /unnumbered/70039469/report.pdf (Caused by NameResolutionError(&quot;&lt;urllib3.connection.HTTPSConnection object at 0x0000021FD2458740&gt;: Failed to resolve &#39;pubs.usgs.gov&#39; ([Errno 11001] getaddrinfo failed)&quot;))
+ERROR:root:Error downloading https://esajournals.onlinelibrary.wiley.com/doi/pdfdirect/10.1002/ecs2.1516: HTTPSConnectionPool(host=&#39;esajournals.onlinelibrary.wiley.com&#39;, port=443): Max retries exceeded with url: /doi/pdfdirect/10.1002/ecs2.1516 (Caused by NameResolutionError(&quot;&lt;urllib3.connection.HTTPSConnection object at 0x0000021FD245B650&gt;: Failed to resolve &#39;esajournals.onlinelibrary.wiley.com&#39; ([Errno 11001] getaddrinfo failed)&quot;))
+ERROR:root:Error downloading https://pubs.usgs.gov/wri/1998/4135/report.pdf: HTTPSConnectionPool(host=&#39;pubs.usgs.gov&#39;, port=443): Max retries exceeded with url: /wri/1998/4135/report.pdf (Caused by NameResolutionError(&quot;&lt;urllib3.connection.HTTPSConnection object at 0x0000021FD244E6F0&gt;: Failed to resolve &#39;pubs.usgs.gov&#39; ([Errno 11001] getaddrinfo failed)&quot;))
+ERROR:root:Error downloading https://downloads.hindawi.com/journals/tswj/2001/982595.pdf: HTTPSConnectionPool(host=&#39;downloads.hindawi.com&#39;, port=443): Max retries exceeded with url: /journals/tswj/2001/982595.pdf (Caused by NameResolutionError(&quot;&lt;urllib3.connection.HTTPSConnection object at 0x0000021FD244F410&gt;: Failed to resolve &#39;downloads.hindawi.com&#39; ([Errno 11001] getaddrinfo failed)&quot;))
+ERROR:root:Error downloading https://www.cambridge.org/core/services/aop-cambridge-core/content/view/687387836A170818A27BE08500372780/S1068280524000030a.pdf/div-class-title-a-recreation-demand-model-for-warmwater-fishing-in-delaware-with-welfare-effects-for-improvements-in-catch-rates-species-diversity-and-water-clarity-div.pdf: HTTPSConnectionPool(host=&#39;www.cambridge.org&#39;, port=443): Max retries exceeded with url: /core/services/aop-cambridge-core/content/view/687387836A170818A27BE08500372780/S1068280524000030a.pdf/div-class-title-a-recreation-demand-model-for-warmwater-fishing-in-delaware-with-welfare-effects-for-improvements-in-catch-rates-species-diversity-and-water-clarity-div.pdf (Caused by NameResolutionError(&quot;&lt;urllib3.connection.HTTPSConnection object at 0x0000021FD2458B30&gt;: Failed to resolve &#39;www.cambridge.org&#39; ([Errno 11001] getaddrinfo failed)&quot;))
+ERROR:root:Error downloading https://onlinelibrary.wiley.com/doi/pdfdirect/10.1002/etc.5856: HTTPSConnectionPool(host=&#39;onlinelibrary.wiley.com&#39;, port=443): Max retries exceeded with url: /doi/pdfdirect/10.1002/etc.5856 (Caused by NameResolutionError(&quot;&lt;urllib3.connection.HTTPSConnection object at 0x0000021FD2459CD0&gt;: Failed to resolve &#39;onlinelibrary.wiley.com&#39; ([Errno 11001] getaddrinfo failed)&quot;))
+ERROR:root:Error downloading https://www.osti.gov/servlets/purl/963106: HTTPSConnectionPool(host=&#39;www.osti.gov&#39;, port=443): Max retries exceeded with url: /servlets/purl/963106 (Caused by NameResolutionError(&quot;&lt;urllib3.connection.HTTPSConnection object at 0x0000021FD245A750&gt;: Failed to resolve &#39;www.osti.gov&#39; ([Errno 11001] getaddrinfo failed)&quot;))
+ERROR:root:Error downloading https://onlinelibrary.wiley.com/doi/pdfdirect/10.1029/2001WR001234: HTTPSConnectionPool(host=&#39;onlinelibrary.wiley.com&#39;, port=443): Max retries exceeded with url: /doi/pdfdirect/10.1029/2001WR001234 (Caused by NameResolutionError(&quot;&lt;urllib3.connection.HTTPSConnection object at 0x0000021FD245BA70&gt;: Failed to resolve &#39;onlinelibrary.wiley.com&#39; ([Errno 11001] getaddrinfo failed)&quot;))
+ERROR:root:Error downloading https://www.mdpi.com/2073-4441/11/9/1800/pdf?version=1567076114: HTTPSConnectionPool(host=&#39;www.mdpi.com&#39;, port=443): Max retries exceeded with url: /2073-4441/11/9/1800/pdf?version=1567076114 (Caused by NameResolutionError(&quot;&lt;urllib3.connection.HTTPSConnection object at 0x0000021FD244E450&gt;: Failed to resolve &#39;www.mdpi.com&#39; ([Errno 11001] getaddrinfo failed)&quot;))
+ERROR:root:Error downloading https://pubs.usgs.gov/wdr/1993/ok-93-2/report.pdf: HTTPSConnectionPool(host=&#39;pubs.usgs.gov&#39;, port=443): Max retries exceeded with url: /wdr/1993/ok-93-2/report.pdf (Caused by NameResolutionError(&quot;&lt;urllib3.connection.HTTPSConnection object at 0x0000021FC4151880&gt;: Failed to resolve &#39;pubs.usgs.gov&#39; ([Errno 11001] getaddrinfo failed)&quot;))
+ERROR:root:Error downloading https://pubs.usgs.gov/wri/1998/4223/report.pdf: HTTPSConnectionPool(host=&#39;pubs.usgs.gov&#39;, port=443): Max retries exceeded with url: /wri/1998/4223/report.pdf (Caused by NameResolutionError(&quot;&lt;urllib3.connection.HTTPSConnection object at 0x0000021FD245A360&gt;: Failed to resolve &#39;pubs.usgs.gov&#39; ([Errno 11001] getaddrinfo failed)&quot;))
+ERROR:root:Error downloading https://pubs.usgs.gov/of/2008/1318/pdf/ofr2008-1318.pdf: HTTPSConnectionPool(host=&#39;pubs.usgs.gov&#39;, port=443): Max retries exceeded with url: /of/2008/1318/pdf/ofr2008-1318.pdf (Caused by NameResolutionError(&quot;&lt;urllib3.connection.HTTPSConnection object at 0x0000021FD2458410&gt;: Failed to resolve &#39;pubs.usgs.gov&#39; ([Errno 11001] getaddrinfo failed)&quot;))
+ERROR:root:Error downloading https://pubs.usgs.gov/wsp/1790a/report.pdf: HTTPSConnectionPool(host=&#39;pubs.usgs.gov&#39;, port=443): Max retries exceeded with url: /wsp/1790a/report.pdf (Caused by NameResolutionError(&quot;&lt;urllib3.connection.HTTPSConnection object at 0x0000021FD245B050&gt;: Failed to resolve &#39;pubs.usgs.gov&#39; ([Errno 11001] getaddrinfo failed)&quot;))
+ERROR:root:Error downloading http://www.scirp.org/journal/PaperDownload.aspx?paperID=51119: HTTPConnectionPool(host=&#39;www.scirp.org&#39;, port=80): Max retries exceeded with url: /journal/PaperDownload.aspx?paperID=51119 (Caused by NameResolutionError(&quot;&lt;urllib3.connection.HTTPConnection object at 0x0000021FD2412F90&gt;: Failed to resolve &#39;www.scirp.org&#39; ([Errno 11001] getaddrinfo failed)&quot;))
+ERROR:root:Error downloading https://onlinelibrary.wiley.com/doi/pdfdirect/10.1111/ddi.12427: HTTPSConnectionPool(host=&#39;onlinelibrary.wiley.com&#39;, port=443): Max retries exceeded with url: /doi/pdfdirect/10.1111/ddi.12427 (Caused by NameResolutionError(&quot;&lt;urllib3.connection.HTTPSConnection object at 0x0000021FD244FE30&gt;: Failed to resolve &#39;onlinelibrary.wiley.com&#39; ([Errno 11001] getaddrinfo failed)&quot;))
+ERROR:root:Error downloading https://onlinelibrary.wiley.com/doi/pdfdirect/10.2134/jeq2010.0119: HTTPSConnectionPool(host=&#39;onlinelibrary.wiley.com&#39;, port=443): Max retries exceeded with url: /doi/pdfdirect/10.2134/jeq2010.0119 (Caused by NameResolutionError(&quot;&lt;urllib3.connection.HTTPSConnection object at 0x0000021FD244F1D0&gt;: Failed to resolve &#39;onlinelibrary.wiley.com&#39; ([Errno 11001] getaddrinfo failed)&quot;))
+ERROR:root:Error downloading https://onlinelibrary.wiley.com/doi/pdfdirect/10.1002/rra.1134: HTTPSConnectionPool(host=&#39;onlinelibrary.wiley.com&#39;, port=443): Max retries exceeded with url: /doi/pdfdirect/10.1002/rra.1134 (Caused by NameResolutionError(&quot;&lt;urllib3.connection.HTTPSConnection object at 0x0000021FD24580B0&gt;: Failed to resolve &#39;onlinelibrary.wiley.com&#39; ([Errno 11001] getaddrinfo failed)&quot;))
+ERROR:root:Error downloading https://www.biodiversitylibrary.org/itempdf/224952: HTTPSConnectionPool(host=&#39;www.biodiversitylibrary.org&#39;, port=443): Max retries exceeded with url: /itempdf/224952 (Caused by NameResolutionError(&quot;&lt;urllib3.connection.HTTPSConnection object at 0x0000021FD245A2A0&gt;: Failed to resolve &#39;www.biodiversitylibrary.org&#39; ([Errno 11001] getaddrinfo failed)&quot;))
+ERROR:root:Error downloading https://pubs.usgs.gov/wsp/2179/report.pdf: HTTPSConnectionPool(host=&#39;pubs.usgs.gov&#39;, port=443): Max retries exceeded with url: /wsp/2179/report.pdf (Caused by NameResolutionError(&quot;&lt;urllib3.connection.HTTPSConnection object at 0x0000021FD245BEC0&gt;: Failed to resolve &#39;pubs.usgs.gov&#39; ([Errno 11001] getaddrinfo failed)&quot;))
+ERROR:root:Error downloading https://hess.copernicus.org/articles/17/961/2013/hess-17-961-2013.pdf: HTTPSConnectionPool(host=&#39;hess.copernicus.org&#39;, port=443): Max retries exceeded with url: /articles/17/961/2013/hess-17-961-2013.pdf (Caused by NameResolutionError(&quot;&lt;urllib3.connection.HTTPSConnection object at 0x0000021FD246C7D0&gt;: Failed to resolve &#39;hess.copernicus.org&#39; ([Errno 11001] getaddrinfo failed)&quot;))
+ERROR:root:Error downloading https://www.mdpi.com/2076-3417/9/7/1450/pdf?version=1554539449: HTTPSConnectionPool(host=&#39;www.mdpi.com&#39;, port=443): Max retries exceeded with url: /2076-3417/9/7/1450/pdf?version=1554539449 (Caused by NameResolutionError(&quot;&lt;urllib3.connection.HTTPSConnection object at 0x0000021FD245BB00&gt;: Failed to resolve &#39;www.mdpi.com&#39; ([Errno 11001] getaddrinfo failed)&quot;))
+ERROR:root:Error downloading https://www.mdpi.com/2076-3263/13/2/45/pdf?version=1675653369: HTTPSConnectionPool(host=&#39;www.mdpi.com&#39;, port=443): Max retries exceeded with url: /2076-3263/13/2/45/pdf?version=1675653369 (Caused by NameResolutionError(&quot;&lt;urllib3.connection.HTTPSConnection object at 0x0000021FD2458C50&gt;: Failed to resolve &#39;www.mdpi.com&#39; ([Errno 11001] getaddrinfo failed)&quot;))
+ERROR:root:Error downloading https://esurf.copernicus.org/articles/9/253/2021/esurf-9-253-2021.pdf: HTTPSConnectionPool(host=&#39;esurf.copernicus.org&#39;, port=443): Max retries exceeded with url: /articles/9/253/2021/esurf-9-253-2021.pdf (Caused by NameResolutionError(&quot;&lt;urllib3.connection.HTTPSConnection object at 0x0000021FD244D760&gt;: Failed to resolve &#39;esurf.copernicus.org&#39; ([Errno 11001] getaddrinfo failed)&quot;))
+ERROR:root:Error downloading https://www.osti.gov/servlets/purl/6525174: HTTPSConnectionPool(host=&#39;www.osti.gov&#39;, port=443): Max retries exceeded with url: /servlets/purl/6525174 (Caused by NameResolutionError(&quot;&lt;urllib3.connection.HTTPSConnection object at 0x0000021FD244E6F0&gt;: Failed to resolve &#39;www.osti.gov&#39; ([Errno 11001] getaddrinfo failed)&quot;))
+ERROR:root:Error downloading https://www.ccsenet.org/journal/index.php/jgg/article/download/48953/26292: HTTPSConnectionPool(host=&#39;www.ccsenet.org&#39;, port=443): Max retries exceeded with url: /journal/index.php/jgg/article/download/48953/26292 (Caused by NameResolutionError(&quot;&lt;urllib3.connection.HTTPSConnection object at 0x0000021FD2413E00&gt;: Failed to resolve &#39;www.ccsenet.org&#39; ([Errno 11001] getaddrinfo failed)&quot;))
+ERROR:root:Error downloading https://researchrepository.wvu.edu/cgi/viewcontent.cgi?article=4486&amp;context=etd: HTTPSConnectionPool(host=&#39;researchrepository.wvu.edu&#39;, port=443): Max retries exceeded with url: /cgi/viewcontent.cgi?article=4486&amp;context=etd (Caused by NameResolutionError(&quot;&lt;urllib3.connection.HTTPSConnection object at 0x0000021FD246C6B0&gt;: Failed to resolve &#39;researchrepository.wvu.edu&#39; ([Errno 11001] getaddrinfo failed)&quot;))
+ERROR:root:Error downloading https://link.springer.com/content/pdf/10.1007/s00382-017-3794-7.pdf: HTTPSConnectionPool(host=&#39;link.springer.com&#39;, port=443): Max retries exceeded with url: /content/pdf/10.1007/s00382-017-3794-7.pdf (Caused by NameResolutionError(&quot;&lt;urllib3.connection.HTTPSConnection object at 0x0000021FD2411220&gt;: Failed to resolve &#39;link.springer.com&#39; ([Errno 11001] getaddrinfo failed)&quot;))
+ERROR:root:Error downloading https://adgeo.copernicus.org/articles/39/21/2014/adgeo-39-21-2014.pdf: HTTPSConnectionPool(host=&#39;adgeo.copernicus.org&#39;, port=443): Max retries exceeded with url: /articles/39/21/2014/adgeo-39-21-2014.pdf (Caused by NameResolutionError(&quot;&lt;urllib3.connection.HTTPSConnection object at 0x0000021FD245AE70&gt;: Failed to resolve &#39;adgeo.copernicus.org&#39; ([Errno 11001] getaddrinfo failed)&quot;))
+ERROR:root:Error downloading https://onlinelibrary.wiley.com/doi/pdfdirect/10.1029/2010WR009656: HTTPSConnectionPool(host=&#39;onlinelibrary.wiley.com&#39;, port=443): Max retries exceeded with url: /doi/pdfdirect/10.1029/2010WR009656 (Caused by NameResolutionError(&quot;&lt;urllib3.connection.HTTPSConnection object at 0x0000021FD245A5D0&gt;: Failed to resolve &#39;onlinelibrary.wiley.com&#39; ([Errno 11001] getaddrinfo failed)&quot;))
+ERROR:root:Error downloading https://pubs.usgs.gov/wdr/1988/or-88-1/report.pdf: HTTPSConnectionPool(host=&#39;pubs.usgs.gov&#39;, port=443): Max retries exceeded with url: /wdr/1988/or-88-1/report.pdf (Caused by NameResolutionError(&quot;&lt;urllib3.connection.HTTPSConnection object at 0x0000021FD244FC50&gt;: Failed to resolve &#39;pubs.usgs.gov&#39; ([Errno 11001] getaddrinfo failed)&quot;))
+ERROR:root:Error downloading https://pubs.usgs.gov/wri/wri014213/pdf/wri014213.pdf: HTTPSConnectionPool(host=&#39;pubs.usgs.gov&#39;, port=443): Max retries exceeded with url: /wri/wri014213/pdf/wri014213.pdf (Caused by NameResolutionError(&quot;&lt;urllib3.connection.HTTPSConnection object at 0x0000021FD244E5A0&gt;: Failed to resolve &#39;pubs.usgs.gov&#39; ([Errno 11001] getaddrinfo failed)&quot;))
+ERROR:root:Error downloading https://onlinelibrary.wiley.com/doi/pdfdirect/10.1002/cyto.b.20599: HTTPSConnectionPool(host=&#39;onlinelibrary.wiley.com&#39;, port=443): Max retries exceeded with url: /doi/pdfdirect/10.1002/cyto.b.20599 (Caused by NameResolutionError(&quot;&lt;urllib3.connection.HTTPSConnection object at 0x0000021FD246CDD0&gt;: Failed to resolve &#39;onlinelibrary.wiley.com&#39; ([Errno 11001] getaddrinfo failed)&quot;))
+ERROR:root:Error downloading https://www.cambridge.org/core/services/aop-cambridge-core/content/view/A778FF477DC4A0255741B43041891D68/S0022143000206175a.pdf/div-class-title-modelling-distributed-and-channelized-subglacial-drainage-the-spacing-of-channels-div.pdf: HTTPSConnectionPool(host=&#39;www.cambridge.org&#39;, port=443): Max retries exceeded with url: /core/services/aop-cambridge-core/content/view/A778FF477DC4A0255741B43041891D68/S0022143000206175a.pdf/div-class-title-modelling-distributed-and-channelized-subglacial-drainage-the-spacing-of-channels-div.pdf (Caused by NameResolutionError(&quot;&lt;urllib3.connection.HTTPSConnection object at 0x0000021FD246D6A0&gt;: Failed to resolve &#39;www.cambridge.org&#39; ([Errno 11001] getaddrinfo failed)&quot;))
+ERROR:root:Error downloading https://erdc-library.erdc.dren.mil/jspui/bitstream/11681/37073/1/MRG%26P%20Report%20No%2034.pdf: HTTPSConnectionPool(host=&#39;erdc-library.erdc.dren.mil&#39;, port=443): Max retries exceeded with url: /jspui/bitstream/11681/37073/1/MRG%26P%20Report%20No%2034.pdf (Caused by NameResolutionError(&quot;&lt;urllib3.connection.HTTPSConnection object at 0x0000021FD2458500&gt;: Failed to resolve &#39;erdc-library.erdc.dren.mil&#39; ([Errno 11001] getaddrinfo failed)&quot;))
+ERROR:root:Error downloading https://onlinelibrary.wiley.com/doi/pdfdirect/10.1111/j.1365-2486.2011.02589.x: HTTPSConnectionPool(host=&#39;onlinelibrary.wiley.com&#39;, port=443): Max retries exceeded with url: /doi/pdfdirect/10.1111/j.1365-2486.2011.02589.x (Caused by NameResolutionError(&quot;&lt;urllib3.connection.HTTPSConnection object at 0x0000021FD245BF80&gt;: Failed to resolve &#39;onlinelibrary.wiley.com&#39; ([Errno 11001] getaddrinfo failed)&quot;))
+ERROR:root:Error downloading https://link.springer.com/content/pdf/10.1007/s12237-022-01080-y.pdf: HTTPSConnectionPool(host=&#39;link.springer.com&#39;, port=443): Max retries exceeded with url: /content/pdf/10.1007/s12237-022-01080-y.pdf (Caused by NameResolutionError(&quot;&lt;urllib3.connection.HTTPSConnection object at 0x0000021FD244E240&gt;: Failed to resolve &#39;link.springer.com&#39; ([Errno 11001] getaddrinfo failed)&quot;))
+ERROR:root:Error downloading https://onlinelibrary.wiley.com/doi/pdfdirect/10.1029/2003WR002294: HTTPSConnectionPool(host=&#39;onlinelibrary.wiley.com&#39;, port=443): Max retries exceeded with url: /doi/pdfdirect/10.1029/2003WR002294 (Caused by NameResolutionError(&quot;&lt;urllib3.connection.HTTPSConnection object at 0x0000021FD244FA70&gt;: Failed to resolve &#39;onlinelibrary.wiley.com&#39; ([Errno 11001] getaddrinfo failed)&quot;))
+ERROR:root:Error downloading https://pubs.usgs.gov/of/1977/0551/report.pdf: HTTPSConnectionPool(host=&#39;pubs.usgs.gov&#39;, port=443): Max retries exceeded with url: /of/1977/0551/report.pdf (Caused by NameResolutionError(&quot;&lt;urllib3.connection.HTTPSConnection object at 0x0000021FD246D1F0&gt;: Failed to resolve &#39;pubs.usgs.gov&#39; ([Errno 11001] getaddrinfo failed)&quot;))
+ERROR:root:Error downloading https://onlinelibrary.wiley.com/doi/pdfdirect/10.1029/2007WR005912: HTTPSConnectionPool(host=&#39;onlinelibrary.wiley.com&#39;, port=443): Max retries exceeded with url: /doi/pdfdirect/10.1029/2007WR005912 (Caused by NameResolutionError(&quot;&lt;urllib3.connection.HTTPSConnection object at 0x0000021FD246CE00&gt;: Failed to resolve &#39;onlinelibrary.wiley.com&#39; ([Errno 11001] getaddrinfo failed)&quot;))
+ERROR:root:Error downloading https://www.osti.gov/servlets/purl/1043077: HTTPSConnectionPool(host=&#39;www.osti.gov&#39;, port=443): Max retries exceeded with url: /servlets/purl/1043077 (Caused by NameResolutionError(&quot;&lt;urllib3.connection.HTTPSConnection object at 0x0000021FD244E930&gt;: Failed to resolve &#39;www.osti.gov&#39; ([Errno 11001] getaddrinfo failed)&quot;))
+ERROR:root:Error downloading https://www.mdpi.com/2223-7747/11/9/1259/pdf?version=1651832308: HTTPSConnectionPool(host=&#39;www.mdpi.com&#39;, port=443): Max retries exceeded with url: /2223-7747/11/9/1259/pdf?version=1651832308 (Caused by NameResolutionError(&quot;&lt;urllib3.connection.HTTPSConnection object at 0x0000021FD2410C80&gt;: Failed to resolve &#39;www.mdpi.com&#39; ([Errno 11001] getaddrinfo failed)&quot;))
+ERROR:root:Error downloading https://journals.plos.org/plosone/article/file?id=10.1371/journal.pone.0279704&amp;type=printable: HTTPSConnectionPool(host=&#39;journals.plos.org&#39;, port=443): Max retries exceeded with url: /plosone/article/file?id=10.1371/journal.pone.0279704&amp;type=printable (Caused by NameResolutionError(&quot;&lt;urllib3.connection.HTTPSConnection object at 0x0000021FD245A1E0&gt;: Failed to resolve &#39;journals.plos.org&#39; ([Errno 11001] getaddrinfo failed)&quot;))
+ERROR:root:Error downloading https://jm.copernicus.org/articles/42/257/2023/jm-42-257-2023.pdf: HTTPSConnectionPool(host=&#39;jm.copernicus.org&#39;, port=443): Max retries exceeded with url: /articles/42/257/2023/jm-42-257-2023.pdf (Caused by NameResolutionError(&quot;&lt;urllib3.connection.HTTPSConnection object at 0x0000021FC4151B20&gt;: Failed to resolve &#39;jm.copernicus.org&#39; ([Errno 11001] getaddrinfo failed)&quot;))
+ERROR:root:Error downloading https://www.jswconline.org/content/jswc/65/5/304.full.pdf: HTTPSConnectionPool(host=&#39;www.jswconline.org&#39;, port=443): Max retries exceeded with url: /content/jswc/65/5/304.full.pdf (Caused by NameResolutionError(&quot;&lt;urllib3.connection.HTTPSConnection object at 0x0000021FD246DCA0&gt;: Failed to resolve &#39;www.jswconline.org&#39; ([Errno 11001] getaddrinfo failed)&quot;))
+ERROR:root:Error downloading https://bg.copernicus.org/articles/12/921/2015/bg-12-921-2015.pdf: HTTPSConnectionPool(host=&#39;bg.copernicus.org&#39;, port=443): Max retries exceeded with url: /articles/12/921/2015/bg-12-921-2015.pdf (Caused by NameResolutionError(&quot;&lt;urllib3.connection.HTTPSConnection object at 0x0000021FD246E5D0&gt;: Failed to resolve &#39;bg.copernicus.org&#39; ([Errno 11001] getaddrinfo failed)&quot;))
+ERROR:root:Error downloading https://hess.copernicus.org/articles/15/471/2011/hess-15-471-2011.pdf: HTTPSConnectionPool(host=&#39;hess.copernicus.org&#39;, port=443): Max retries exceeded with url: /articles/15/471/2011/hess-15-471-2011.pdf (Caused by NameResolutionError(&quot;&lt;urllib3.connection.HTTPSConnection object at 0x0000021FD24592B0&gt;: Failed to resolve &#39;hess.copernicus.org&#39; ([Errno 11001] getaddrinfo failed)&quot;))
+ERROR:root:Error downloading http://publicfiles.dep.state.fl.us/FGS/FGS_Publications/IC/IC76PRIDE/FSGS%20IC%20No.76%201972.pdf: HTTPConnectionPool(host=&#39;publicfiles.dep.state.fl.us&#39;, port=80): Max retries exceeded with url: /FGS/FGS_Publications/IC/IC76PRIDE/FSGS%20IC%20No.76%201972.pdf (Caused by NameResolutionError(&quot;&lt;urllib3.connection.HTTPConnection object at 0x0000021FD2458380&gt;: Failed to resolve &#39;publicfiles.dep.state.fl.us&#39; ([Errno 11001] getaddrinfo failed)&quot;))
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>oalex_records_202503221902
+</pre></div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="simple visible nav section-nav flex-column">
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Mathis Loïc Messager
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

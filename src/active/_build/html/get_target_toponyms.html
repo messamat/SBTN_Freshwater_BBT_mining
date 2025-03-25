@@ -1,0 +1,1101 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Get target toponyms &#8212; Basin Threshold Tool data mining protocol</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b76e3c8a" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'get_target_toponyms';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Create search strings" href="create_search_strings.html" />
+    <link rel="prev" title="Download hydrographic and administrative boundary data" href="download_geographic_refs.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/sbti_low_res_logo.png" class="logo__image only-light" alt="Basin Threshold Tool data mining protocol - Home"/>
+    <script>document.write(`<img src="_static/sbti_low_res_logo.png" class="logo__image only-dark" alt="Basin Threshold Tool data mining protocol - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Set up analysis</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="lit_utility_functions_2025.html">Utility functions used throughout analysis</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Compile ancillary cartographic data</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="download_geographic_refs.html">Download hydrographic and administrative boundary data</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Get target toponyms</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Design scientific database search protocol</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="create_search_strings.html">Create search strings</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/messamat/BTT_data_mining_protocol" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/messamat/BTT_data_mining_protocol/issues/new?title=Issue%20on%20page%20%2Fget_target_toponyms.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/get_target_toponyms.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Get target toponyms</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="get-target-toponyms">
+<h1>Get target toponyms<a class="headerlink" href="#get-target-toponyms" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">run</span> download_geographic_refs.ipynb
+<span class="o">%</span><span class="k">run</span> set_up.py 
+
+<span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span> <span class="c1">#require pip install pyarrow</span>
+<span class="kn">from</span> <span class="nn">shapely.geometry</span> <span class="kn">import</span> <span class="n">Point</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+
+<span class="n">verbose</span><span class="o">=</span><span class="kc">True</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">test_pts_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">datdir</span><span class="p">,</span> <span class="s1">&#39;test_gages&#39;</span><span class="p">,</span> <span class="s1">&#39;test_gages.shp&#39;</span><span class="p">)</span>
+
+<span class="n">wbd_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">nhd_dir</span><span class="p">,</span> <span class="s1">&#39;WBD_National_GDB.gdb&#39;</span><span class="p">)</span>
+<span class="n">hu12_parquet</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">nhd_dir</span><span class="p">,</span> <span class="s1">&#39;wbd_hu12list.parquet&#39;</span><span class="p">)</span>
+<span class="n">basinatlas_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">hydroatlas_dir</span><span class="p">,</span>  <span class="s1">&#39;BasinATLAS_v10.gdb&#39;</span><span class="p">)</span>
+<span class="n">basinatlas11_parquet</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">hydroatlas_dir</span><span class="p">,</span> <span class="s1">&#39;basinatlas_lev11_idlist.parquet&#39;</span><span class="p">)</span>
+<span class="c1">#geoglows_vpu_path = os.path.join(geoglows_dir, &#39;vpu-boundaries.gpkg&#39;)</span>
+<span class="n">gadm_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">gadm_dir</span><span class="p">,</span> <span class="s1">&#39;gadm_410-levels.gpkg&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">_expand_basin_idlist</span><span class="p">(</span><span class="n">in_id_list</span><span class="p">,</span>
+                         <span class="n">in_refids_parquet</span><span class="p">,</span>
+                         <span class="n">refids_col</span><span class="p">,</span>
+                         <span class="n">out_id_range</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Expands a list of basin IDs by extracting IDs at different levels from a reference Parquet file.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        in_id_list (list): List of input basin IDs.  Can be integers or strings.</span>
+<span class="sd">        in_refids_parquet (str): Path to the reference Parquet file.</span>
+<span class="sd">        refids_col (str): Name of the column in the Parquet file containing the full basin IDs.</span>
+<span class="sd">        out_id_range (list): List of integer levels to extract.  e.g., [6, 9, 12]</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        pandas.DataFrame: DataFrame containing the expanded basin IDs.  The returned DataFrame</span>
+<span class="sd">                          will have columns named based on `refids_col` and levels in `out_id_range`.</span>
+<span class="sd">                          The data type of the output columns will match the input type of `in_id_list`.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        TypeError: If the length of input IDs is inconsistent with the length in reference table.</span>
+<span class="sd">        FileNotFoundError: If the input Parquet file does not exist.</span>
+<span class="sd">        ValueError:  If `out_id_range` contains values greater than the maximum ID length.</span>
+<span class="sd">                   Or if an empty DataFrame is returned by filtering.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">id_all_pd</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">(</span><span class="n">in_refids_parquet</span><span class="p">)</span>
+
+    <span class="c1"># Determine input type and maximum ID length</span>
+    <span class="n">in_id_type</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="n">in_id_list</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">in_id_type</span> <span class="o">==</span> <span class="nb">str</span><span class="p">:</span>
+      <span class="n">in_id_len</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">in_id_list</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">elif</span> <span class="n">in_id_type</span> <span class="o">==</span> <span class="nb">int</span><span class="p">:</span>
+      <span class="n">in_id_len</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">in_id_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+    <span class="k">else</span><span class="p">:</span>
+      <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;in_id_list must be a list of strings or integers&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Determine the reference ID type and length</span>
+    <span class="n">first_ref_id</span> <span class="o">=</span> <span class="n">id_all_pd</span><span class="p">[</span><span class="n">refids_col</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="c1">#Get first item in col</span>
+    <span class="n">refid_type</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="n">first_ref_id</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">refid_type</span> <span class="o">==</span> <span class="nb">str</span><span class="p">:</span>
+      <span class="n">refid_len</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">first_ref_id</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">pd</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">types</span><span class="o">.</span><span class="n">is_integer_dtype</span><span class="p">(</span><span class="n">refid_type</span><span class="p">)</span> <span class="ow">or</span>  <span class="n">refid_type</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">:</span>
+      <span class="n">refid_len</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">first_ref_id</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+      <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">refids_col</span><span class="si">}</span><span class="s2"> must contain strings or integers&quot;</span><span class="p">)</span>
+
+
+    <span class="k">if</span> <span class="n">in_id_len</span> <span class="o">&gt;</span> <span class="n">refid_len</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Input ID length (</span><span class="si">{</span><span class="n">in_id_len</span><span class="si">}</span><span class="s2">) is greater than reference ID length (</span><span class="si">{</span><span class="n">refid_len</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+
+    <span class="c1"># --- Input Validation on out_id_range ---</span>
+    <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">level</span> <span class="o">&gt;</span> <span class="n">refid_len</span> <span class="k">for</span> <span class="n">level</span> <span class="ow">in</span> <span class="n">out_id_range</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;out_id_range values cannot exceed reference ID length (</span><span class="si">{</span><span class="n">refid_len</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+
+    <span class="c1"># --- Filtering ---</span>
+    <span class="c1"># Convert to string for consistent prefix matching, then convert back later</span>
+    <span class="n">id_all_pd</span><span class="p">[</span><span class="n">refids_col</span><span class="p">]</span> <span class="o">=</span> <span class="n">id_all_pd</span><span class="p">[</span><span class="n">refids_col</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+    <span class="n">in_id_list_str</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">in_id_list</span><span class="p">]</span>
+
+    <span class="n">id_pd</span> <span class="o">=</span> <span class="n">id_all_pd</span><span class="p">[</span><span class="n">id_all_pd</span><span class="p">[</span><span class="n">refids_col</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="n">in_id_list_str</span><span class="p">))]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">id_pd</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;No matching IDs found. Check in_id_list and refids_col.&quot;</span><span class="p">)</span>
+
+    <span class="c1"># --- Column Expansion ---</span>
+    <span class="n">colroot</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;[0-9]+&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">refids_col</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">id_level</span> <span class="ow">in</span> <span class="n">out_id_range</span><span class="p">:</span>
+        <span class="n">col_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">colroot</span><span class="si">}{</span><span class="n">id_level</span><span class="si">}</span><span class="s1">&#39;</span>
+        <span class="k">if</span> <span class="n">col_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">id_pd</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+            <span class="n">id_pd</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="n">col_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">id_pd</span><span class="p">[</span><span class="n">refids_col</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="p">[:</span><span class="n">id_level</span><span class="p">]</span>
+            <span class="c1"># Convert back to original type, if necessary</span>
+            <span class="k">if</span> <span class="n">in_id_type</span> <span class="o">==</span> <span class="nb">int</span><span class="p">:</span>
+                <span class="n">id_pd</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="n">col_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">(</span><span class="n">id_pd</span><span class="p">[</span><span class="n">col_name</span><span class="p">],</span>
+                                                       <span class="n">errors</span><span class="o">=</span><span class="s1">&#39;raise&#39;</span><span class="p">)</span> 
+
+    <span class="c1"># Convert refids_col back to original type</span>
+    <span class="k">if</span> <span class="n">pd</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">types</span><span class="o">.</span><span class="n">is_integer_dtype</span><span class="p">(</span><span class="n">refid_type</span><span class="p">)</span> <span class="ow">or</span>  <span class="n">refid_type</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">:</span>
+        <span class="n">id_pd</span><span class="p">[</span><span class="n">refids_col</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">(</span><span class="n">id_pd</span><span class="p">[</span><span class="n">refids_col</span><span class="p">],</span> 
+                                          <span class="n">errors</span><span class="o">=</span><span class="s1">&#39;raise&#39;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">id_pd</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">_format_gdf_tojoin</span><span class="p">(</span><span class="n">in_xytab</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">lon_col</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">lat_col</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> 
+                       <span class="n">in_vector</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">hull</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="c1">#Read xy table</span>
+    <span class="k">if</span> <span class="n">in_xytab</span><span class="p">:</span>
+        <span class="n">points_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_table</span><span class="p">(</span><span class="n">point_locations_path</span><span class="p">)</span>
+        <span class="n">gdf_to_join</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">(</span>
+            <span class="n">points_df</span><span class="p">,</span>
+            <span class="n">geometry</span><span class="o">=</span><span class="p">[</span><span class="n">Point</span><span class="p">(</span><span class="n">xy</span><span class="p">)</span> <span class="k">for</span> <span class="n">xy</span> 
+                      <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">points_df</span><span class="p">[</span><span class="n">lon_col</span><span class="p">],</span> <span class="n">points_df</span><span class="p">[</span><span class="n">lat_col</span><span class="p">])]</span>
+        <span class="p">)</span>
+    
+    <span class="c1">#Read vector layer</span>
+    <span class="k">if</span> <span class="n">in_vector</span><span class="p">:</span>
+        <span class="n">gdf_to_join</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">in_vector</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">hull</span><span class="p">:</span>
+        <span class="c1"># Create convex hull using union_all() (current recommended method)</span>
+        <span class="n">gdf_to_join</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">(</span>
+            <span class="n">geometry</span><span class="o">=</span><span class="p">[</span><span class="n">gdf_to_join</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">union_all</span><span class="p">()</span><span class="o">.</span><span class="n">convex_hull</span><span class="p">],</span> 
+            <span class="n">crs</span><span class="o">=</span><span class="n">gdf_to_join</span><span class="o">.</span><span class="n">crs</span>
+        <span class="p">)</span>
+    <span class="k">return</span><span class="p">(</span><span class="n">gdf_to_join</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Create a list of PFAF_ID for basins level 11</span>
+<span class="k">def</span> <span class="nf">create_basinatlas11_list</span><span class="p">(</span><span class="n">basinatlas_path</span><span class="p">,</span> 
+                             <span class="n">out_basinatlas11_parquet</span><span class="p">,</span> 
+                             <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">out_basinatlas11_parquet</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Generating a list of PFAF ID level 11 and saving it to </span><span class="se">\</span>
+<span class="s1">            </span><span class="si">{</span><span class="n">out_basinatlas11_parquet</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+            
+        <span class="n">basinatlas11_list</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span>
+            <span class="n">filename</span><span class="o">=</span><span class="n">basinatlas_path</span><span class="p">,</span> 
+            <span class="n">layer</span><span class="o">=</span><span class="s1">&#39;BasinATLAS_v10_lev11&#39;</span><span class="p">,</span> 
+            <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;PFAF_ID&#39;</span><span class="p">],</span>
+            <span class="n">rows</span><span class="o">=</span><span class="mi">1031785</span><span class="p">,</span>
+            <span class="n">ignore_geometry</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span>\
+        <span class="n">astype</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">Int64Dtype</span><span class="p">())</span><span class="o">.</span>\
+        <span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;PFAF_ID&quot;</span><span class="p">:</span> <span class="s2">&quot;PFAF_ID11&quot;</span><span class="p">})</span>
+        
+        <span class="n">basinatlas11_list</span><span class="o">.</span><span class="n">to_parquet</span><span class="p">(</span><span class="n">out_basinatlas11_parquet</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">basinatlas11_list</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">(</span><span class="n">out_basinatlas11_parquet</span><span class="p">)</span>
+    <span class="k">return</span><span class="p">(</span><span class="n">basinatlas11_list</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_matching_hydrobasin</span><span class="p">(</span><span class="n">in_basinatlas_path</span><span class="p">,</span>
+                            <span class="n">in_xytab</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">lon_col</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">lat_col</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                            <span class="n">in_vector</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> 
+                            <span class="n">in_id_list</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> 
+                            <span class="n">in_refids_parquet</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                            <span class="n">hull</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">sjoin_predicate</span><span class="o">=</span><span class="s1">&#39;intersects&#39;</span><span class="p">):</span>
+    <span class="c1">#If points or polygons are provided ----------------------------------------</span>
+    <span class="k">if</span> <span class="n">in_xytab</span> <span class="ow">or</span> <span class="n">in_vector</span><span class="p">:</span>
+        <span class="n">gdf_to_join</span> <span class="o">=</span> <span class="n">_format_gdf_tojoin</span><span class="p">(</span><span class="n">in_xytab</span><span class="p">,</span> <span class="n">lon_col</span><span class="p">,</span> <span class="n">lat_col</span><span class="p">,</span> 
+                                         <span class="n">in_vector</span><span class="p">,</span> 
+                                         <span class="n">hull</span><span class="p">)</span>
+        
+        <span class="c1">#Reach NHD WBD</span>
+        <span class="n">bas_lev6</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">in_basinatlas_path</span><span class="p">,</span> 
+                                 <span class="n">layer</span><span class="o">=</span><span class="s1">&#39;BasinATLAS_v10_lev06&#39;</span><span class="p">,</span>
+                                 <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;PFAF_ID&#39;</span><span class="p">]</span>
+                                <span class="p">)</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;PFAF_ID&quot;</span><span class="p">:</span> <span class="s2">&quot;PFAF_ID6&quot;</span><span class="p">})</span>
+    
+        <span class="c1">#Spatially join to hydrologic units</span>
+        <span class="n">matched_bas</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">sjoin</span><span class="p">(</span><span class="n">gdf_to_join</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="n">crs</span><span class="o">=</span><span class="n">bas_lev6</span><span class="o">.</span><span class="n">crs</span><span class="p">),</span> 
+                               <span class="n">bas_lev6</span><span class="p">,</span> 
+                               <span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> 
+                               <span class="n">predicate</span><span class="o">=</span><span class="n">sjoin_predicate</span><span class="p">)</span>
+        <span class="n">in_id_list</span> <span class="o">=</span> <span class="n">matched_bas</span><span class="o">.</span><span class="n">PFAF_ID6</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+
+    <span class="n">pfaf_pd</span> <span class="o">=</span> <span class="n">_expand_basin_idlist</span><span class="p">(</span>
+        <span class="n">in_id_list</span><span class="p">,</span> 
+        <span class="n">in_refids_parquet</span><span class="p">,</span> 
+        <span class="n">refids_col</span><span class="o">=</span><span class="s1">&#39;PFAF_ID11&#39;</span><span class="p">,</span> 
+        <span class="n">out_id_range</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">12</span><span class="p">))</span>
+
+    <span class="k">return</span><span class="p">(</span><span class="n">pfaf_pd</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_hydroatlas_data</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Getting HydroATLAS data&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Create a list of NHD HUC12</span>
+<span class="k">def</span> <span class="nf">create_huc12_list</span><span class="p">(</span><span class="n">wbd_path</span><span class="p">,</span> 
+                      <span class="n">out_hu12_parquet</span><span class="p">,</span>
+                      <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">out_hu12_parquet</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Generating a list of HUC 12 and saving it to </span><span class="se">\</span>
+<span class="s1">            </span><span class="si">{</span><span class="n">out_hu12_parquet</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">wbdhu12_list</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">wbd_path</span><span class="p">,</span> 
+                                     <span class="n">layer</span><span class="o">=</span><span class="s1">&#39;WBDHU12&#39;</span><span class="p">,</span> 
+                                     <span class="n">rows</span><span class="o">=</span><span class="mi">105000</span><span class="p">,</span>
+                                     <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;huc12&#39;</span><span class="p">],</span>
+                                     <span class="n">ignore_geometry</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">wbdhu12_list</span><span class="o">.</span><span class="n">to_parquet</span><span class="p">(</span><span class="n">out_hu12_parquet</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">wbdhu12_list</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">(</span><span class="n">out_hu12_parquet</span><span class="p">)</span>
+    <span class="k">return</span><span class="p">(</span><span class="n">wbdhu12_list</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_matching_NHD_HU</span><span class="p">(</span><span class="n">in_wbd_path</span><span class="p">,</span>
+                        <span class="n">in_xytab</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">lon_col</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">lat_col</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                        <span class="n">in_vector</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> 
+                        <span class="n">in_id_list</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> 
+                        <span class="n">in_refids_parquet</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                        <span class="n">hull</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">sjoin_predicate</span><span class="o">=</span><span class="s1">&#39;intersects&#39;</span><span class="p">):</span>
+
+    <span class="c1">#If points or polygons are provided ----------------------------------------</span>
+    <span class="k">if</span> <span class="n">in_xytab</span> <span class="ow">or</span> <span class="n">in_vector</span><span class="p">:</span>
+        <span class="n">gdf_to_join</span> <span class="o">=</span> <span class="n">_format_gdf_tojoin</span><span class="p">(</span><span class="n">in_xytab</span><span class="p">,</span> <span class="n">lon_col</span><span class="p">,</span> <span class="n">lat_col</span><span class="p">,</span> 
+                                         <span class="n">in_vector</span><span class="p">,</span> 
+                                         <span class="n">hull</span><span class="p">)</span>
+        
+        <span class="c1">#Get NHD WBD</span>
+        <span class="n">wbdhu6</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">in_wbd_path</span><span class="p">,</span> 
+                               <span class="n">layer</span><span class="o">=</span><span class="s1">&#39;WBDHU6&#39;</span><span class="p">,</span>
+                               <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;huc6&#39;</span><span class="p">]</span>
+                              <span class="p">)</span>
+    
+        <span class="c1">#Spatially join to hydrologic units</span>
+        <span class="n">matched_nhd</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">sjoin</span><span class="p">(</span><span class="n">gdf_to_join</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="n">crs</span><span class="o">=</span><span class="n">wbdhu6</span><span class="o">.</span><span class="n">crs</span><span class="p">),</span> 
+                               <span class="n">wbdhu6</span><span class="p">,</span> 
+                               <span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> 
+                               <span class="n">predicate</span><span class="o">=</span><span class="n">sjoin_predicate</span><span class="p">)</span>
+        <span class="n">in_id_list</span> <span class="o">=</span> <span class="n">matched_nhd</span><span class="o">.</span><span class="n">huc6</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+        
+    <span class="n">huc_pd</span> <span class="o">=</span> <span class="n">_expand_basin_idlist</span><span class="p">(</span>
+        <span class="n">in_id_list</span><span class="p">,</span> 
+        <span class="n">in_refids_parquet</span><span class="p">,</span> 
+        <span class="n">refids_col</span><span class="o">=</span><span class="s1">&#39;huc12&#39;</span><span class="p">,</span> 
+        <span class="n">out_id_range</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+
+    <span class="k">return</span><span class="p">(</span><span class="n">huc_pd</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_nhd_hydronyms</span><span class="p">(</span><span class="n">in_hucs</span><span class="p">,</span> <span class="n">in_wbd_path</span><span class="p">,</span>  <span class="n">out_dir</span><span class="p">,</span>
+                      <span class="n">huc_range</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+                      <span class="n">flatten</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                      <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span>
+                    <span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Getting NHD basin names&#39;</span><span class="p">)</span>
+
+    <span class="c1">#If panda dataframe</span>
+    <span class="c1">#Get basin names------------------------------------------------------------</span>
+    <span class="k">for</span> <span class="n">coln</span> <span class="ow">in</span> <span class="n">in_hucs</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+        <span class="n">huc_len</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;[a-zA-Z]+&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">coln</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">huc_len</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;HUC level cannot be extracted from </span><span class="si">{</span><span class="n">coln</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">huc_len</span><span class="p">)</span> <span class="ow">in</span> <span class="n">huc_range</span><span class="p">:</span>
+            <span class="n">wbd</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">in_wbd_path</span><span class="p">,</span> 
+                                <span class="n">layer</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;WBDHU</span><span class="si">{</span><span class="n">huc_len</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+                                <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="n">coln</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">],</span>
+                                <span class="n">ignore_geometry</span><span class="o">=</span><span class="kc">True</span>
+                               <span class="p">)</span>
+            <span class="n">in_hucs</span> <span class="o">=</span> <span class="n">in_hucs</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">wbd</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="n">coln</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span><span class="o">.</span>\
+            <span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">coln</span><span class="si">}</span><span class="s2">_name&quot;</span><span class="p">})</span>
+
+    <span class="c1">#Download data by HU4 if needed</span>
+    <span class="n">huc4_list</span> <span class="o">=</span> <span class="n">in_hucs</span><span class="o">.</span><span class="n">huc4</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+    <span class="n">nhd_huc4_pathdict</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">huc</span> <span class="ow">in</span> <span class="n">huc4_list</span><span class="p">:</span>
+        <span class="n">download_nhdplus_hr_hu4</span><span class="p">(</span>
+            <span class="n">hu4</span><span class="o">=</span><span class="n">huc</span><span class="p">,</span> 
+            <span class="n">out_dir</span><span class="o">=</span><span class="n">out_dir</span><span class="p">,</span> 
+            <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span>
+        <span class="p">)</span>
+        <span class="n">nhd_huc4_pathdict</span><span class="p">[</span><span class="n">huc</span><span class="p">]</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+            <span class="n">out_dir</span><span class="p">,</span>
+            <span class="sa">f</span><span class="s1">&#39;NHDPLUS_H_</span><span class="si">{</span><span class="n">huc</span><span class="si">}</span><span class="s1">_HU4_GDB.gdb&#39;</span><span class="p">)</span>
+    <span class="c1">#print(nhd_huc4_pathdict)</span>
+    
+    <span class="c1">#Get river names------------------------------------------------------------</span>
+    <span class="c1">#NHD flow line types: FCode attribute to subset</span>
+    <span class="c1"># 46000: Stream/River</span>
+    <span class="c1"># 46003: Stream/River: Hydrographic Category = Intermittent</span>
+    <span class="c1"># 46006: Stream/River: Hydrographic Category = Perennial</span>
+    <span class="c1"># 46007: Stream/River: Hydrographic Category = Ephemeral</span>
+    <span class="c1"># 55800: Artificial path&#39;&#39;&#39;</span>
+    <span class="n">fcode_sel_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">46000</span><span class="p">,</span> <span class="mi">46006</span><span class="p">,</span> <span class="mi">46003</span><span class="p">,</span> <span class="mi">46007</span><span class="p">,</span> <span class="mi">55800</span><span class="p">]</span>
+    <span class="n">huc4_rivnames_dict</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="k">for</span> <span class="n">huc4</span> <span class="ow">in</span> <span class="n">nhd_huc4_pathdict</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">huc4</span><span class="p">)</span>
+        <span class="c1">#Read flowlines</span>
+        <span class="c1">#NHD uses geometries with measured (M) values but not supported by pyogrio</span>
+        <span class="c1">#underlying geopandas by default (faster than fiona)</span>
+        <span class="k">with</span> <span class="n">warnings</span><span class="o">.</span><span class="n">catch_warnings</span><span class="p">():</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="ne">UserWarning</span><span class="p">,</span> <span class="n">module</span><span class="o">=</span><span class="s2">&quot;pyogrio.raw&quot;</span><span class="p">)</span>
+            
+            <span class="n">flowlines_gpd</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span>
+                <span class="n">filename</span><span class="o">=</span><span class="n">nhd_huc4_pathdict</span><span class="p">[</span><span class="n">huc4</span><span class="p">],</span> 
+                <span class="n">layer</span><span class="o">=</span><span class="s1">&#39;NHDFlowline&#39;</span><span class="p">,</span>
+                <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;NHDPlusID&#39;</span><span class="p">,</span> <span class="s1">&#39;ReachCode&#39;</span><span class="p">,</span> <span class="s1">&#39;GNIS_Name&#39;</span><span class="p">,</span> <span class="s1">&#39;FCode&#39;</span><span class="p">],</span>
+                <span class="n">ignore_geometry</span><span class="o">=</span><span class="kc">True</span>
+            <span class="p">)</span>
+            
+        <span class="n">vaa_pd</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span>
+            <span class="n">filename</span><span class="o">=</span><span class="n">nhd_huc4_pathdict</span><span class="p">[</span><span class="n">huc4</span><span class="p">],</span> 
+            <span class="n">layer</span><span class="o">=</span><span class="s1">&#39;NHDPlusFlowlineVAA&#39;</span><span class="p">,</span>
+            <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;NHDPlusID&#39;</span><span class="p">,</span> <span class="s1">&#39;StreamOrde&#39;</span><span class="p">],</span>
+            <span class="n">ignore_geometry</span><span class="o">=</span><span class="kc">True</span>
+        <span class="p">)</span>
+
+
+        <span class="c1">#reachcode: The first eight digits are the WBD_HUC8.</span>
+        <span class="c1">#The next six digits are randomly assigned, </span>
+        <span class="c1">#sequential numbers that are unique within a HUC8.</span>
+        <span class="n">flowlines_gpd</span><span class="p">[</span><span class="s1">&#39;huc8&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">flowlines_gpd</span><span class="p">[</span><span class="s1">&#39;ReachCode&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="p">[:</span><span class="mi">8</span><span class="p">]</span> 
+        <span class="n">huc8_sel</span> <span class="o">=</span> <span class="n">in_hucs</span><span class="p">[</span><span class="n">in_hucs</span><span class="p">[</span><span class="s1">&#39;huc4&#39;</span><span class="p">]</span><span class="o">==</span><span class="n">huc4</span><span class="p">][</span><span class="s1">&#39;huc8&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+        <span class="n">flowlines_sub</span> <span class="o">=</span> <span class="n">flowlines_gpd</span><span class="p">[</span><span class="n">flowlines_gpd</span><span class="p">[</span><span class="s1">&#39;huc8&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">huc8_sel</span><span class="p">)]</span><span class="o">.</span>\
+        <span class="n">merge</span><span class="p">(</span><span class="n">vaa_pd</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;inner&#39;</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;NHDPlusID&#39;</span><span class="p">)</span>
+    
+        <span class="n">rivnames</span> <span class="o">=</span> <span class="n">flowlines_sub</span><span class="p">[(</span>
+            <span class="p">(</span><span class="n">flowlines_sub</span><span class="p">[</span><span class="s1">&#39;FCode&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">fcode_sel_list</span><span class="p">))</span> 
+            <span class="o">&amp;</span> <span class="p">(</span><span class="n">flowlines_sub</span><span class="p">[</span><span class="s1">&#39;StreamOrde&#39;</span><span class="p">]</span> <span class="o">&gt;=</span><span class="mi">6</span><span class="p">)</span>
+            <span class="o">&amp;</span> <span class="p">(</span><span class="n">flowlines_sub</span><span class="p">[</span><span class="s1">&#39;GNIS_Name&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">notna</span><span class="p">())</span>
+        <span class="p">)]</span><span class="o">.</span><span class="n">GNIS_Name</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+
+        <span class="n">huc4_rivnames_dict</span><span class="p">[</span><span class="n">huc4</span><span class="p">]</span> <span class="o">=</span> <span class="n">rivnames</span>
+
+    <span class="k">if</span> <span class="n">flatten</span><span class="p">:</span>
+        <span class="c1">#Create a set with all unique hydronyms from basins and rivers from NHD</span>
+        <span class="n">test_nhd_hydronyms_set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span>
+            <span class="o">*</span><span class="n">pd</span><span class="o">.</span><span class="n">melt</span><span class="p">(</span><span class="n">in_hucs</span><span class="p">,</span> 
+                     <span class="n">value_vars</span><span class="o">=</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;huc</span><span class="si">{</span><span class="n">lev</span><span class="si">}</span><span class="s1">_name&#39;</span> <span class="k">for</span> <span class="n">lev</span> <span class="ow">in</span> <span class="n">huc_range</span><span class="p">]</span>
+                    <span class="p">)</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">unique</span><span class="p">(),</span>
+            <span class="o">*</span><span class="nb">set</span><span class="p">({</span><span class="n">x</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">huc4_rivnames_dict</span><span class="o">.</span><span class="n">values</span><span class="p">()</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">v</span><span class="p">})</span>
+        <span class="p">])</span>
+        <span class="k">return</span><span class="p">(</span><span class="n">test_nhd_hydronyms_set</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1">#Return dictionary with basin names and river names</span>
+        <span class="n">out_dict</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">out_dict</span><span class="p">[</span><span class="s1">&#39;basins_all_pd&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">in_hucs</span>
+        <span class="n">out_dict</span><span class="p">[</span><span class="s1">&#39;rivers_huc4_dict&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">huc4_rivnames_dict</span>
+        <span class="k">return</span><span class="p">(</span><span class="n">out_dict</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_nhd_data</span><span class="p">(</span><span class="n">in_hucs_pd</span><span class="p">,</span> <span class="n">out_dir</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Getting NHD data for all HU4&#39;</span><span class="p">)</span>
+    
+    <span class="c1">#Download data by HU4 if needed</span>
+    <span class="n">huc4_list</span> <span class="o">=</span> <span class="n">in_hucs_pd</span><span class="o">.</span><span class="n">huc4</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+    <span class="n">nhd_huc4_pathdict</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">huc</span> <span class="ow">in</span> <span class="n">huc4_list</span><span class="p">:</span>
+        <span class="n">download_nhdplus_hr_hu4</span><span class="p">(</span>
+            <span class="n">hu4</span><span class="o">=</span><span class="n">huc</span><span class="p">,</span> 
+            <span class="n">out_dir</span><span class="o">=</span><span class="n">out_dir</span><span class="p">,</span> 
+            <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span>
+        <span class="p">)</span>
+        <span class="n">nhd_huc4_pathdict</span><span class="p">[</span><span class="n">huc</span><span class="p">]</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+            <span class="n">out_dir</span><span class="p">,</span>
+            <span class="sa">f</span><span class="s1">&#39;NHDPLUS_H_</span><span class="si">{</span><span class="n">huc</span><span class="si">}</span><span class="s1">_HU4_GDB.gdb&#39;</span><span class="p">)</span>
+
+    <span class="n">nhdplus_huc4_dict</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">huc4</span> <span class="ow">in</span> <span class="n">nhd_huc4_pathdict</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">huc4</span><span class="p">)</span>
+            
+        <span class="c1">#Read flowlines</span>
+        <span class="c1">#NHD uses geometries with measured (M) values but not supported by pyogrio</span>
+        <span class="c1">#underlying geopandas by default (faster than fiona)</span>
+        <span class="k">with</span> <span class="n">warnings</span><span class="o">.</span><span class="n">catch_warnings</span><span class="p">():</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="ne">UserWarning</span><span class="p">,</span> <span class="n">module</span><span class="o">=</span><span class="s2">&quot;pyogrio.raw&quot;</span><span class="p">)</span>
+            
+            <span class="n">flowlines_gpd</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span>
+                <span class="n">filename</span><span class="o">=</span><span class="n">nhd_huc4_pathdict</span><span class="p">[</span><span class="n">huc4</span><span class="p">],</span> 
+                <span class="n">layer</span><span class="o">=</span><span class="s1">&#39;NHDFlowline&#39;</span><span class="p">,</span>
+                <span class="n">ignore_geometry</span><span class="o">=</span><span class="kc">False</span>
+            <span class="p">)</span>
+        <span class="n">vaa_pd</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span>
+            <span class="n">filename</span><span class="o">=</span><span class="n">nhd_huc4_pathdict</span><span class="p">[</span><span class="n">huc4</span><span class="p">],</span> 
+            <span class="n">layer</span><span class="o">=</span><span class="s1">&#39;NHDPlusFlowlineVAA&#39;</span><span class="p">,</span>
+            <span class="n">ignore_geometry</span><span class="o">=</span><span class="kc">False</span>
+        <span class="p">)</span>
+
+        <span class="n">flowlines_vaa</span> <span class="o">=</span> <span class="n">flowlines_gpd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span>
+            <span class="n">vaa_pd</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;inner&#39;</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;NHDPlusID&#39;</span><span class="p">,</span> <span class="n">suffixes</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;_vaa&#39;</span><span class="p">))</span>
+
+        <span class="n">nhdplus_huc4_dict</span><span class="p">[</span><span class="n">huc4</span><span class="p">]</span> <span class="o">=</span> <span class="n">flowlines_vaa</span>
+    
+    <span class="k">return</span><span class="p">(</span><span class="n">nhdplus_huc4_dict</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_geoglows_vpu</span><span class="p">(</span><span class="n">in_geoglows_vpu_path</span><span class="p">,</span>
+                     <span class="n">in_xytab</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">lon_col</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">lat_col</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                     <span class="n">in_vector</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> 
+                     <span class="n">in_id_list</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> 
+                     <span class="n">in_refids_parquet</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                     <span class="n">hull</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">sjoin_predicate</span><span class="o">=</span><span class="s1">&#39;intersects&#39;</span><span class="p">):</span>
+    
+    <span class="k">if</span> <span class="n">in_xytab</span> <span class="ow">or</span> <span class="n">in_vector</span><span class="p">:</span>
+        <span class="n">gdf_to_join</span> <span class="o">=</span> <span class="n">_format_gdf_tojoin</span><span class="p">(</span><span class="n">in_xytab</span><span class="p">,</span> <span class="n">lon_col</span><span class="p">,</span> <span class="n">lat_col</span><span class="p">,</span> 
+                                         <span class="n">in_vector</span><span class="p">,</span> 
+                                         <span class="n">hull</span><span class="p">)</span>
+        
+        <span class="c1">#Reach NHD WBD</span>
+        <span class="n">vpus</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">in_geoglows_vpu_path</span><span class="p">,</span> 
+                                 <span class="n">layer</span><span class="o">=</span><span class="s1">&#39;vpu-boundaries&#39;</span><span class="p">,</span>
+                                 <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;VPU&#39;</span><span class="p">]</span>
+                                <span class="p">)</span>
+    
+        <span class="c1">#Spatially join to hydrologic units</span>
+        <span class="n">matched_vpus</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">sjoin</span><span class="p">(</span><span class="n">gdf_to_join</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="n">crs</span><span class="o">=</span><span class="n">vpus</span><span class="o">.</span><span class="n">crs</span><span class="p">),</span> 
+                                 <span class="n">vpus</span><span class="p">,</span> 
+                                 <span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> 
+                                 <span class="n">predicate</span><span class="o">=</span><span class="n">sjoin_predicate</span><span class="p">)</span>
+        <span class="n">vpu_list</span> <span class="o">=</span> <span class="n">matched_vpus</span><span class="o">.</span><span class="n">VPU</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+
+    <span class="k">return</span><span class="p">(</span><span class="n">vpu_list</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_gadm_lev1_dict</span><span class="p">(</span><span class="n">in_gadm_path</span><span class="p">,</span>
+                  <span class="n">in_xytab</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">lon_col</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">lat_col</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                  <span class="n">in_vector</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> 
+                  <span class="n">in_id_list</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> 
+                  <span class="n">in_refids_parquet</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                  <span class="n">hull</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">sjoin_predicate</span><span class="o">=</span><span class="s1">&#39;intersects&#39;</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">in_xytab</span> <span class="ow">or</span> <span class="n">in_vector</span><span class="p">:</span>
+        <span class="n">gdf_to_join</span> <span class="o">=</span> <span class="n">_format_gdf_tojoin</span><span class="p">(</span><span class="n">in_xytab</span><span class="p">,</span> <span class="n">lon_col</span><span class="p">,</span> <span class="n">lat_col</span><span class="p">,</span> 
+                                         <span class="n">in_vector</span><span class="p">,</span> 
+                                         <span class="n">hull</span><span class="p">)</span>
+        
+        <span class="c1">#Get GADM data</span>
+        <span class="n">gadm_gpd</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">in_gadm_path</span><span class="p">,</span> <span class="n">layer</span><span class="o">=</span><span class="s1">&#39;ADM_1&#39;</span><span class="p">)</span>
+    
+        <span class="c1">#Spatially join to hydrologic units</span>
+        <span class="n">matched_adm_units</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">sjoin</span><span class="p">(</span>
+            <span class="n">gadm_gpd</span><span class="p">,</span>
+            <span class="n">gdf_to_join</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="n">crs</span><span class="o">=</span><span class="n">gadm_gpd</span><span class="o">.</span><span class="n">crs</span><span class="p">),</span> 
+            <span class="n">how</span><span class="o">=</span><span class="s1">&#39;inner&#39;</span><span class="p">,</span> 
+            <span class="n">predicate</span><span class="o">=</span><span class="n">sjoin_predicate</span><span class="p">)</span>
+        <span class="c1">#print(matched_adm_units)</span>
+
+    <span class="k">return</span><span class="p">(</span><span class="n">matched_adm_units</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># #Run functions</span>
+<span class="c1"># hu12_list = create_huc12_list(wbd_path, hu12_parquet)</span>
+
+<span class="c1"># basinatlas11_list = create_basinatlas11_list(</span>
+<span class="c1">#     basinatlas_path, </span>
+<span class="c1">#     basinatlas11_parquet)</span>
+
+<span class="c1"># test_huc_pd = get_matching_NHD_HU(</span>
+<span class="c1">#     in_wbd_path=wbd_path,</span>
+<span class="c1">#     in_vector=test_pts_path,</span>
+<span class="c1">#     in_refids_parquet=hu12_parquet,</span>
+<span class="c1">#     hull=True,</span>
+<span class="c1">#     sjoin_predicate=&#39;intersects&#39;</span>
+<span class="c1"># )</span>
+<span class="c1"># #print(test_huc_pd)</span>
+<span class="c1"># #in_id_list = in_umrb_huc4s = [f&#39;07{str(i).zfill(2)}&#39; for i in range(2,15)]</span>
+
+<span class="c1"># test_nhd_hydronyms = get_nhd_hydronyms(</span>
+<span class="c1">#     in_hucs=test_huc_pd,</span>
+<span class="c1">#     in_wbd_path=wbd_path,</span>
+<span class="c1">#     out_dir = os.path.join(nhd_dir, &#39;nhdplus_hr&#39;),</span>
+<span class="c1">#     huc_range=[2, 4, 6],</span>
+<span class="c1">#     verbose=False</span>
+<span class="c1"># )</span>
+<span class="c1"># len(test_nhd_hydronyms)</span>
+
+<span class="c1"># test_pfaf_pd = get_matching_hydrobasin(</span>
+<span class="c1">#     in_basinatlas_path=basinatlas_path,</span>
+<span class="c1">#     in_vector=test_pts_path,</span>
+<span class="c1">#     #in_id_list=None, </span>
+<span class="c1">#     in_refids_parquet=basinatlas11_parquet,</span>
+<span class="c1">#     hull=True,</span>
+<span class="c1">#     sjoin_predicate=&#39;intersects&#39;</span>
+<span class="c1"># )</span>
+<span class="c1"># #print(test_pfaf_pd)</span>
+
+<span class="c1"># test_pfaf_pd_idlist = get_matching_hydrobasin(</span>
+<span class="c1">#     in_basinatlas_path=basinatlas_path,</span>
+<span class="c1">#     in_id_list=[742873, 742875, 742876], </span>
+<span class="c1">#     in_refids_parquet=basinatlas11_parquet</span>
+<span class="c1"># )</span>
+<span class="c1"># #print(test_pfaf_pd_idlist)</span>
+
+
+<span class="c1"># test_vpu_list = get_geoglows_vpu(</span>
+<span class="c1">#     in_geoglows_vpu_path=geoglows_vpu_path,</span>
+<span class="c1">#     in_vector=test_pts_path,</span>
+<span class="c1">#     hull=True,</span>
+<span class="c1">#     sjoin_predicate=&#39;intersects&#39;</span>
+<span class="c1"># )</span>
+<span class="c1"># print(test_vpu_list)</span>
+
+<span class="c1"># test_gadm_lev1 = get_gadm_lev1_dict(</span>
+<span class="c1">#     in_gadm_path=gadm_path,</span>
+<span class="c1">#     in_vector=test_pts_path,</span>
+<span class="c1">#     hull=True,</span>
+<span class="c1">#     sjoin_predicate=&#39;intersects&#39;</span>
+<span class="c1"># )</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">################IN DEVELOPMENT ###############################</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_geoglows_hydronyms</span><span class="p">(</span><span class="n">in_geoglows_path</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+
+    <span class="n">country_tab_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">in_geoglows_path</span><span class="p">,</span> 
+                                    <span class="s1">&#39;tables&#39;</span><span class="p">,</span> <span class="s1">&#39;v2-countries-table.parquet&#39;</span><span class="p">)</span>
+    <span class="n">country_pd</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">(</span><span class="n">country_tab_path</span><span class="p">)</span>
+
+    <span class="n">meta_tab_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">in_geoglows_path</span><span class="p">,</span> 
+                                    <span class="s1">&#39;tables&#39;</span><span class="p">,</span> <span class="s1">&#39;package-metadata-table.parquet&#39;</span><span class="p">)</span>
+    <span class="n">meta_pd</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">(</span><span class="n">meta_tab_path</span><span class="p">)</span>
+
+    <span class="n">model_tab_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">in_geoglows_path</span><span class="p">,</span> 
+                                    <span class="s1">&#39;tables&#39;</span><span class="p">,</span> <span class="s1">&#39;v2-model-table.parquet&#39;</span><span class="p">)</span>
+    <span class="n">model_pd</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">(</span><span class="n">model_tab_path</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Getting geoglows river names&#39;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">vpu</span> <span class="ow">in</span> <span class="n">test_vpu_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+        <span class="n">streams_gpd</span><span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span>
+                <span class="n">filename</span><span class="o">=</span><span class="n">nhd_huc4_pathdict</span><span class="p">[</span><span class="n">huc4</span><span class="p">],</span> 
+                <span class="n">layer</span><span class="o">=</span><span class="s1">&#39;NHDFlowline&#39;</span><span class="p">,</span>
+                <span class="n">ignore_geometry</span><span class="o">=</span><span class="kc">False</span>
+        <span class="p">)</span>
+          
+<span class="c1"># geoglows_path = os.path.join(datdir, &#39;geoglows&#39;)</span>
+<span class="c1"># get_geoglows_hydronyms(in_geoglows_path=geoglows_path, verbose=True)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="download_geographic_refs.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Download hydrographic and administrative boundary data</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="create_search_strings.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Create search strings</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Mathis Loïc Messager
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
